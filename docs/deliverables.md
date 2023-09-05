@@ -21,7 +21,7 @@ Players:
 - [ ] StudentID
 - [ ] Privacy
 - [ ] Event
-- [ ] StagesCompleted
+- [ ] Score
 
 Stages:
 - [ ] ID
