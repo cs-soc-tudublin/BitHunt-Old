@@ -47,3 +47,17 @@ DATABASE_URL=postgres://[username]:[password]@[database URL]:[port]/[name]
 ADMIN_PASSWORD=[password]
 ```
 
+5. Start the server.
+
+```bash
+npm run dev
+```
+
+6. Navigate to '[URL]:5173/admin' and log in with the password you set in the `.env` file.
+
+7. Click 'Initialise Database'.
+
+8. You're done! You can now create your own treasure hunt.
+
+## Documentation
+The documentation for BitHunt can be found in the [docs]('/docs') directory.
