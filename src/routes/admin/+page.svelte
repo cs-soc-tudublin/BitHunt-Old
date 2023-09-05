@@ -19,6 +19,16 @@
 
             LoggedIn = true;
         }
+        else if(data.status == 500){
+            addToast({
+                message: data.message,
+                type: "error",
+                dismissible: true,
+                timeout: 5000
+            });
+
+            LoggedIn = false;
+        }
         else{
             LoggedIn = false;
         }

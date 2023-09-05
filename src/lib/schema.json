@@ -1,49 +1,51 @@
 {
-    "Players": {
-        "Name": "TEXT",
-        "StudentID": "TEXT",
-        "Privacy": "BOOLEAN",
-        "Event": "TEXT",
-        "Score": "INTEGER"
-    },
+    "Tables": {
+        "Players": {
+            "Name": "TEXT",
+            "StudentID": "TEXT",
+            "Privacy": "BOOLEAN",
+            "Event": "TEXT",
+            "Score": "INTEGER"
+        },
 
-    "Stages": {
-        "ID": "SERIAL PRIMARY KEY",
-        "Clue": "TEXT",
-        "Name": "TEXT",
-        "Event": "TEXT",
-        "PuzzleType": "TEXT"
-    },
+        "Stages": {
+            "ID": "SERIAL PRIMARY KEY",
+            "Clue": "TEXT",
+            "Name": "TEXT",
+            "Event": "TEXT",
+            "PuzzleType": "TEXT"
+        },
 
-    "Puzzles": {
-        "ID":"SERIAL PRIMARY KEY",
-        "Event": "TEXT",
-        "Type": "TEXT",
-        "Puzzle": "TEXT"
-    },
+        "Puzzles": {
+            "ID":"SERIAL PRIMARY KEY",
+            "Event": "TEXT",
+            "Type": "TEXT",
+            "Puzzle": "TEXT"
+        },
 
-    "Completion": {
-        "StudentID": "TEXT",
-        "Event": "TEXT"
-    },
+        "Completion": {
+            "StudentID": "TEXT",
+            "Event": "TEXT"
+        },
 
-    "Overall": {
-        "Event": "TEXT",
-        "ParticipantCount": "INTEGER",
-        "StageCount": "INTEGER",
-        "PuzzleCount": "INTEGER",
-        "PrizeCount": "INTEGER",
-        "StagesComplete": "INTEGER"
-    },
+        "Overall": {
+            "Event": "TEXT",
+            "ParticipantCount": "INTEGER",
+            "StageCount": "INTEGER",
+            "PuzzleCount": "INTEGER",
+            "PrizeCount": "INTEGER",
+            "StagesComplete": "INTEGER"
+        },
 
-    "Events": {
-        "ID":"SERIAL PRIMARY KEY",
-        "Name": "TEXT",
-        "Date": "TEXT",
-        "Location": "TEXT",
-        "Description": "TEXT",
-        "Prize": "TEXT",
-        "PrizeCount": "INTEGER",
-        "Active": "BOOLEAN"
+        "Events": {
+            "ID":"SERIAL PRIMARY KEY",
+            "Name": "TEXT",
+            "Date": "TEXT",
+            "Location": "TEXT",
+            "Description": "TEXT",
+            "Prize": "TEXT",
+            "PrizeCount": "INTEGER",
+            "Active": "BOOLEAN"
+        }
     }
 }

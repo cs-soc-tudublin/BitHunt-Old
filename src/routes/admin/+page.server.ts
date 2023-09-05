@@ -1,4 +1,5 @@
 import { redirect } from '@sveltejs/kit';
+import { databaseIntegrity } from '$lib/database';
 import type { PageServerLoad, Actions } from './$types';
 
 // Read in info from .env file
@@ -6,12 +7,23 @@ import { config } from 'dotenv';
 config();
 
 export const load: PageServerLoad = async ({ request, cookies }) => {
+    // Check database integrity
+    const dbSecure = await databaseIntegrity(process.env.DATABASE_URL);
+    let dbMessage = "";
+
+    if(dbSecure == 0) {
+        dbMessage = "Database repaired!"
+    }
+    else{
+        dbMessage = "Database integrity verified!"
+    }
+
     // Check if admin cookie is set
     if (cookies.get('admin') === 'true') {
         // Return success
         return {
             status: 200,
-            message: 'Successfully logged in'
+            message: 'Successfully logged in, ' + dbMessage
         }
     } else {
         // Return failure
