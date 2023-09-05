@@ -7,12 +7,7 @@ export const load: LayoutServerLoad = async ({ request, cookies }) => {
     let path = url.pathname;
 
     // Check if admin cookie is set
-    if (cookies.get('admin') !== 'true' && path !== "/admin") {
+    if (cookies.get('admin') !== 'true' && path != "/admin") {
         throw redirect(301, "/admin")
-    }
-    else{
-        return{
-            loggedIn: true
-        }
     }
 }

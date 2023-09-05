@@ -10,15 +10,20 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
-export const load = (async () => {
+
+export const load: PageServerLoad = async ({ cookies }) => {
     // Get a list of all events
     const events = await pool.query(`
         SELECT *
         FROM events
     `);
 
+    let message = cookies.get('message');
+    cookies.set('message', '', { path: '/admin/events' })
+
     return {
         status: 200,
-        events: events.rows
+        events: events.rows,
+        message: message
     };
-}) satisfies PageServerLoad;
+};

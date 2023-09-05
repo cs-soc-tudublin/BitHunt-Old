@@ -1,11 +1,33 @@
 <script lang="ts">
     import type { PageData } from './$types';
+
+    import Toasts from "$lib/toasts/Toasts.svelte";
+    import { addToast } from "$lib/toasts/store.js";
     
     export let data: PageData;
 
+    console.log(data)
+
+    if(data.message == "Event not found"){
+        addToast({
+            message: data.message,
+            type: "error",
+            dismissible: true,
+            timeout: 5000
+        });
+    }
+    else if(data.message == "Event deleted"){
+        addToast({
+            message: data.message,
+            type: "success",
+            dismissible: true,
+            timeout: 5000
+        });
+    }
+
     export let eventView = (id: string) => {
 
-        window.location.href = "/admin/events/" + id;
+        window.location.href = "/admin/events/view/" + id;
 
     },
     eventRemove = (id: string) => {
@@ -24,6 +46,8 @@
 <head>
     <title>BitHunt [🛡️] - Events</title>
 </head>
+
+<Toasts />
 
 <h1 class="title large">Events</h1>
 

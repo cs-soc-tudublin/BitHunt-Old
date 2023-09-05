@@ -1,4 +1,3 @@
-import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import pg from 'pg';
 const { Pool } = pg;

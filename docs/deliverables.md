@@ -17,41 +17,41 @@ This is the list of all features that are required for the project to be conside
 ## Database Tables
 
 Players:
-- [ ] Name
-- [ ] StudentID
-- [ ] Privacy
-- [ ] Event
-- [ ] Score
+- [X] Name
+- [X] StudentID
+- [X] Privacy
+- [X] Event
+- [X] Score
 
 Stages:
-- [ ] ID
-- [ ] Clue (To get to this stage)
-- [ ] Name
-- [ ] Event
-- [ ] PuzzleType
+- [X] ID
+- [X] Clue (To get to this stage)
+- [X] Name
+- [X] Event
+- [X] PuzzleType
 
 Puzzles:
-- [ ] ID
-- [ ] Event
-- [ ] Type
-- [ ] Puzzle
+- [X] ID
+- [X] Event
+- [X] Type
+- [X] Puzzle
 
 Leaderboards:
-- [ ] StudentID
-- [ ] [ Array of Stage IDs ]
+- [X] StudentID
+- [X] [ Array of Stage IDs ]
 
 Overall:
-- [ ] Amount of Students
-- [ ] Amount of Stages
-- [ ] Total Prizes
-- [ ] Amount of Remaining Prizes
-- [ ] Total Amount of Completed Stages
+- [X] Amount of Students
+- [X] Amount of Stages
+- [X] Total Prizes
+- [X] Amount of Remaining Prizes
+- [X] Total Amount of Completed Stages
 
 Events List:
-- [ ] EventID
-- [ ] Event Name
-- [ ] Event Date
-- [ ] Active
+- [X] EventID
+- [X] Event Name
+- [X] Event Date
+- [X] Active
 
 
 
@@ -66,7 +66,7 @@ Events List:
 
 ### Admin UI
 - [ ] Create, Edit & Set Active events
-- [ ] Cookie Storing
+- [X] Cookie Storing
 - [ ] Create & Edit Stages
 - [ ] Create & Edit Puzzles
 - [ ] See Leaderboard

@@ -24,8 +24,8 @@ Once complete, each route will be marked with a checkbox.
 - [X] `/admin` - The main admin page, this is where admins log in to the Admin portal.
     - [X] `/admin/events` - The events page, this is where admins can view, create, edit and delete events.
         - [X] `/admin/events/create` - The create event page, this is where admins can create a new event.
-        - [ ] `/admin/events/remove/:id` - The remove event page, this is where admins can remove an existing event.
-        - [ ] `/admin/events/:id` - The edit event page, this is where admins can edit an existing event.
+        - [X] `/admin/events/remove/:id` - The remove event page, this is where admins can remove an existing event.
+        - [X] `/admin/events/view/:id` - The edit event page, this is where admins can edit an existing event.
     - [ ] `/admin/stages` - The stages page, this is where admins can view, create, edit and delete stages.
         - [ ] `/admin/stages/create` - The create stage page, this is where admins can create a new stage.
         - [ ] `/admin/stages/remove/:id` - The remove stage page, this is where admins can remove an existing stage.
