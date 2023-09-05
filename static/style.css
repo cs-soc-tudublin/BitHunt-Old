@@ -78,6 +78,10 @@ p{
     text-shadow: 5px 5px 5px 5px var(--grey-1);
 }
 
+.verylarge{
+    font-size: 5rem;
+}
+
 .large{
     font-size: 3rem;
 }
@@ -132,6 +136,11 @@ form{
 
 .form-element{
     padding-top: 1rem;
+}
+
+.form-medium{
+    font-size: 1.5rem;
+    border: 5px solid var(--grey-4);
 }
 
 select{
@@ -296,7 +305,7 @@ label{
 i{
     color: var(--green);
     font-size: 1.5rem;
-    margin-right: 0.25rem;
+    margin-right: 0.50rem;
     margin-left: 0.25rem;
 }
 
@@ -446,10 +455,23 @@ input[disabled]{
     transition: 0.5s ease-in-out;
 }
 
+.passwordicon{
+    margin-left: -30px;
+    cursor: pointer;
+}
+
 .logo{
     width: 10%;
     height: auto;
     align-self: center;
     justify-self: center;
     padding: 0;
+}
+
+.nocss{
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--white);
 }

@@ -1,20 +1,29 @@
 import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
-import pg from 'pg';
-import { uuid } from 'uuidv4';
-const { Pool } = pg;
+import type { PageServerLoad, Actions } from './$types';
 
 // Read in info from .env file
 import { config } from 'dotenv';
 config();
 
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
-});
-
+export const load: PageServerLoad = async ({ request, cookies }) => {
+    // Check if admin cookie is set
+    if (cookies.get('admin') === 'true') {
+        // Return success
+        return {
+            status: 200,
+            message: 'Successfully logged in'
+        }
+    } else {
+        // Return failure
+        return {
+            status: 500,
+            message: 'Not logged in'
+        }
+    }
+}
 
 export const actions = {
-    default: async ({ cookies, request }) => {
+    login: async ({ cookies, request }) => {
         let reqData = await request.formData()
 
         // Returns as format:
@@ -22,23 +31,35 @@ export const actions = {
         //  "password" => "string"
         // }
 
-        console.log(reqData.get('password'));
+        // Check if password is correct from .env file
+        if (reqData.get('password') === process.env.ADMIN_PASSWORD) {
+            // Set cookie to true, with age of 2 hours
+            cookies.set('admin', 'true', {
+                maxAge: 60 * 60 * 2,
+                path: '/'
+            })
 
-        let res = await pool.query('SELECT * FROM Users WHERE name = $1', ["admin"]);
-
-        const clues = await pool.query('SELECT * FROM Clues');
-
-        const users = await pool.query('SELECT * FROM Users');
-
-        if(res.rows[0].studentid == reqData.get('password')){
-            return{
+            // Return success
+            return {
                 status: 200,
-                clues: clues.rows,
-                users: users.rows
+                message: 'Successfully logged in'
+            }
+        } else {
+            // Return failure
+            return {
+                status: 500,
+                message: 'Incorrect password'
             }
         }
-        else{
-            throw redirect(302, "/")
-        }
+    },
+    logout: async ({ cookies }) => {
+        console.log("logging out");
+        // Set cookie to false, with age of -1 (expires immediately)
+        cookies.set('admin', 'false', {
+            maxAge: -1,
+            path: '/'
+        })
+
+        throw redirect(301, '/admin');
     }
 } satisfies Actions;
