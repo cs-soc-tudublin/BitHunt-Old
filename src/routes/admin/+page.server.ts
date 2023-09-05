@@ -12,10 +12,10 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
     let dbMessage = "";
 
     if(dbSecure == 0) {
-        dbMessage = "Database repaired!"
+        dbMessage = "Database repaired."
     }
     else{
-        dbMessage = "Database integrity verified!"
+        dbMessage = "Database integrity verified."
     }
 
     // Check if admin cookie is set
@@ -29,7 +29,7 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
         // Return failure
         return {
             status: 500,
-            message: 'Not logged in'
+            message: 'Not logged in, ' + dbMessage
         }
     }
 }

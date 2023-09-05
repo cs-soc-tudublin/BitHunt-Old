@@ -7,7 +7,7 @@ Stages are found by scanning QR Codes, which are generated for each stage.
 It was originally developed for CS++'s Freshers Treasure Hunt 2023.
 
 ## Features
-- Players can register and log in to the game.
+- Player registration (by StudentID)
 - Leaderboard
 - Modular Stages
 - Modular Puzzles
@@ -55,9 +55,9 @@ npm run dev
 
 6. Navigate to '[URL]:5173/admin' and log in with the password you set in the `.env` file.
 
-7. Click 'Initialise Database'.
+7. Ensure the toast at the top of the page says 'Database Repaired!'
 
-8. You're done! You can now create your own treasure hunt.
+8. You're good to go!
 
 ## Documentation
 The documentation for BitHunt can be found in the [docs]('docs') directory.
