@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { databaseIntegrity } from '$lib/database';
+import { databaseIntegrity } from '$lib/server/database';
 import type { PageServerLoad, Actions } from './$types';
 
 // Read in info from .env file

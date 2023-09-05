@@ -1,0 +1,83 @@
+<script lang="ts">
+    import type { PageData } from './$types';
+    
+    export let data: PageData;
+
+    export let eventView = (id: string) => {
+
+        window.location.href = "/admin/events/" + id;
+
+    },
+    eventRemove = (id: string) => {
+
+        let confirmation = confirm("Are you sure you want to delete this event?");
+        
+        if(confirmation){
+
+            window.location.href = "/admin/events/remove/" + id;
+
+        }
+
+    }
+</script>
+
+<head>
+    <title>BitHunt [🛡️] - Events</title>
+</head>
+
+<h1 class="title large">Events</h1>
+
+<div class="buttons">
+    <button class="cspp" on:click={() => window.location.href = "/admin"}>
+        <i class="fa fa-arrow-left"></i>
+        Go Back
+    </button>
+    <button class="cspp" on:click={() => window.location.href = "/admin/events/create"}>
+        <i class="fa fa-calendar-plus-o"></i>
+        Add New
+    </button>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Prize</th>
+            <th>Prize Count</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {#each data.events as event}
+            <tr>
+                <td>{event.name}</td>
+                <td>{event.date}</td>
+                <td>{event.location}</td>
+                <td>{event.description}</td>
+                <td>{event.prize}</td>
+                <td>{event.prizecount}</td>
+                <td>{event.status}</td>
+                <td>
+                    <div class="actions">
+                        <button class="action " on:click={() => eventView(event.id)}>
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="action" on:click={() => eventRemove(event.id)}>
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        {/each}
+
+        {#if data.events.length == 0}
+            <tr>
+                <td colspan="8">No events found.</td>
+            </tr>
+        {/if}
+    </tbody>
+</table>

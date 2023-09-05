@@ -58,7 +58,7 @@
 </script>
 
 <head>
-    <title>BitHunt - Admin Portal</title>
+    <title>BitHunt [🛡️] - Admin Portal</title>
 </head>
 
 <Toasts />

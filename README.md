@@ -60,4 +60,4 @@ npm run dev
 8. You're done! You can now create your own treasure hunt.
 
 ## Documentation
-The documentation for BitHunt can be found in the [docs]('/docs') directory.
+The documentation for BitHunt can be found in the [docs]('docs') directory.

@@ -138,5 +138,8 @@ export const databaseIntegrity = async (databaseURL: any) => {
         }
     }
 
+    // Close connection
+    await client.end();
+
     return returnVal;
 };

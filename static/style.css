@@ -403,6 +403,10 @@ td{
 }
 
 .action{
+    font-size: 1.5rem;
+    vertical-align: middle;
+    display: inline;
+    background: none;
     box-shadow: none;
     transform: scale(1);
     transition: 0.5 ease-in-out;
@@ -474,4 +478,26 @@ input[disabled]{
     border: none;
     background-color: transparent;
     color: var(--white);
+}
+
+/* put at very bottom of page */
+footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 200;
+    text-align: center;
+    padding: 0.5rem;
+    text-shadow: inset 0 0 5px 5px var(--black);
+}
+
+.footerimg{
+    width: 1.75rem;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    display: inline;
 }
