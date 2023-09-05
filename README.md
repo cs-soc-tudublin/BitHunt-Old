@@ -1,38 +1,49 @@
-# create-svelte
+# BitHunt
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+BitHunt is a SvelteKit and PostgreSQL based web app that allows Societies to create treasure hunts for their members to complete.
+Each treasure hunt consists of multiple stages, each stage has a puzzle that the players must solve to get the clue to the next stage.
+Stages are found by scanning QR Codes, which are generated for each stage.
 
-## Creating a project
+It was originally developed for CS++'s Freshers Treasure Hunt 2023.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Features
+- Players can register and log in to the game.
+- Leaderboard
+- Modular Stages
+- Modular Puzzles
+- Full Admin Suite
+- QR Code Generation
+- Overall Game Stats
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Installation
+### Prerequisites
+- Node.js
+- NPM
+- PostgreSQL
 
-# create a new project in my-app
-npm create svelte@latest my-app
+### Steps
+1. Create a new PostgreSQL database.
+
+```sql
+CREATE DATABASE [name];
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+2. Clone the repository.
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+git clone https://github.com/cs-soc-tudublin/BitHunt.git
 ```
 
-## Building
-
-To create a production version of your app:
+3. Install the dependencies.
 
 ```bash
-npm run build
+npm install
 ```
 
-You can preview the production build with `npm run preview`.
+4. Create a `.env` file in the root directory of the project and add the following environment variables.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+```env
+DATABASE_URL=postgres://[username]:[password]@[database URL]:[port]/[name]
+ADMIN_PASSWORD=[password]
+```
+
