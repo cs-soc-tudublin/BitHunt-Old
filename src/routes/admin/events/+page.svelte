@@ -6,7 +6,7 @@
     
     export let data: PageData;
 
-    console.log(data)
+    let status = "Inactive";
 
     if(data.message == "Event not found"){
         addToast({
@@ -84,7 +84,7 @@
                 <td>{event.description}</td>
                 <td>{event.prize}</td>
                 <td>{event.prizecount}</td>
-                <td>{event.active}</td>
+                <td>{event.active == true ? "Active" : "Inactive"}</td>
                 <td>
                     <div class="actions">
                         <button class="action " on:click={() => eventView(event.id)}>

@@ -1,5 +1,4 @@
 import type { PageServerLoad } from './$types';
-import { redirect } from '@sveltejs/kit';
 import pg from 'pg';
 const { Pool } = pg;
 
@@ -11,7 +10,24 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({ request, cookies }) => {
+    // Check if cookie is set
+    const cookie = cookies.get('player');
+    let validCookie = false;
+
+    // Check if cookie is valid
+    if(cookie) {
+        const player = await pool.query(`
+            SELECT *
+            FROM players
+            WHERE studentid = $1
+        `, [cookie]);
+
+        if(player.rows.length > 0) {
+            validCookie = true;
+        }
+    }
+
     // Get a list of all events
     const events = await pool.query(`
         SELECT *
@@ -28,6 +44,7 @@ export const load: PageServerLoad = async () => {
             return{
                 status: 200,
                 event: event,
+                validCookie: validCookie
             }
         }
     }

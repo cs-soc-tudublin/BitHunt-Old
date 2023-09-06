@@ -4,16 +4,16 @@
 
     export let data: PageData;
 
-    console.log(data);
-
     let prize = ""
 
-    if(data.event.prizecount > 1){
-        // Check if last letter is 's'
-        if(data.event.prize.slice(-1) == "s"){
-            prize = data.event.prize + "es"
-        }else{
-            prize = data.event.prize + "s"
+    if(data.status == 200){
+        if(data.event.prizecount > 1){
+            // Check if last letter is 's'
+            if(data.event.prize.slice(-1) == "s"){
+                prize = data.event.prize + "es"
+            }else{
+                prize = data.event.prize + "s"
+            }
         }
     }
 
@@ -36,7 +36,7 @@
 {#if data.status == 200}
     <h2 class="subtitle medium nogap"><strong>Today's Event:</strong> {data.event.name}</h2>
 
-    <h2 class="subtitle medium nogap"><strong>Today's Prize:</strong> {data.event.prizecount} {prize}!</h2>
+    <h2 class="subtitle medium nogap"><strong>Today's Prize:</strong> One of {data.event.prizecount} {prize}!</h2>
 
     <div class="buttons">
         <button class="cspp" on:click={() => register()}>

@@ -47,8 +47,8 @@ export const actions = {
         if (reqData.get('password') === process.env.ADMIN_PASSWORD) {
             // Set cookie to true, with age of 2 hours
             cookies.set('admin', 'true', {
-                maxAge: 60 * 60 * 2,
-                path: '/'
+                maxAge: 7200,
+                secure: false
             })
 
             // Return success
