@@ -1,10 +1,10 @@
 <script lang="ts">
-    import { ChevronLeft } from 'lucide-svelte';
+	import { ChevronLeft } from 'lucide-svelte';
 </script>
 
 <button class="cspp">
-    <ChevronLeft color="var(--green)"/>
-    Back
+	<ChevronLeft color="var(--green)" />
+	Back
 </button>
 
 <h1 class="title large">Logged Out.</h1>

@@ -1,50 +1,43 @@
 <script lang="ts">
-    import type { PageData } from './$types';
+	import type { PageData } from './$types';
 
-    import { ChevronLeft, PlusCircle, Eye, Trash2 } from 'lucide-svelte';
+	import { ChevronLeft, PlusCircle, Eye, Trash2 } from 'lucide-svelte';
 
-    import Toasts from "$lib/toasts/Toasts.svelte";
-    import { addToast } from "$lib/toasts/store.js";
-    
-    export let data: PageData;
+	import Toasts from '$lib/toasts/Toasts.svelte';
+	import { addToast } from '$lib/toasts/store.js';
 
-    if(data.message == "Event not found"){
-        addToast({
-            message: data.message,
-            type: "error",
-            dismissible: true,
-            timeout: 5000
-        });
-    }
-    else if(data.message == "Event deleted"){
-        addToast({
-            message: data.message,
-            type: "success",
-            dismissible: true,
-            timeout: 5000
-        });
-    }
+	export let data: PageData;
 
-    export let eventView = (id: string) => {
+	if (data.message == 'Event not found') {
+		addToast({
+			message: data.message,
+			type: 'error',
+			dismissible: true,
+			timeout: 5000
+		});
+	} else if (data.message == 'Event deleted') {
+		addToast({
+			message: data.message,
+			type: 'success',
+			dismissible: true,
+			timeout: 5000
+		});
+	}
 
-        window.location.href = "/admin/events/view/" + id;
+	export let eventView = (id: string) => {
+			window.location.href = '/admin/events/view/' + id;
+		},
+		eventRemove = (id: string) => {
+			let confirmation = confirm('Are you sure you want to delete this event?');
 
-    },
-    eventRemove = (id: string) => {
-
-        let confirmation = confirm("Are you sure you want to delete this event?");
-        
-        if(confirmation){
-
-            window.location.href = "/admin/events/remove/" + id;
-
-        }
-
-    }
+			if (confirmation) {
+				window.location.href = '/admin/events/remove/' + id;
+			}
+		};
 </script>
 
 <head>
-    <title>BitHunt [🛡️] - Events</title>
+	<title>BitHunt [🛡️] - Events</title>
 </head>
 
 <Toasts />
@@ -52,56 +45,56 @@
 <h1 class="title large">Events</h1>
 
 <div class="buttons">
-    <button class="cspp" on:click={() => window.location.href = "/admin"}>
-        <ChevronLeft color="var(--green)" />
-        Go Back
-    </button>
-    <button class="cspp" on:click={() => window.location.href = "/admin/events/create"}>
-        <PlusCircle color="var(--green)" />
-        Add New
-    </button>
+	<button class="cspp" on:click={() => (window.location.href = '/admin')}>
+		<ChevronLeft color="var(--green)" />
+		Go Back
+	</button>
+	<button class="cspp" on:click={() => (window.location.href = '/admin/events/create')}>
+		<PlusCircle color="var(--green)" />
+		Add New
+	</button>
 </div>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Location</th>
-            <th>Description</th>
-            <th>Prize</th>
-            <th>Prize Count</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {#each data.events as event}
-            <tr>
-                <td>{event.name}</td>
-                <td>{event.date}</td>
-                <td>{event.location}</td>
-                <td>{event.description}</td>
-                <td>{event.prize}</td>
-                <td>{event.prizecount}</td>
-                <td>{event.active == true ? "Active" : "Inactive"}</td>
-                <td>
-                    <div class="actions">
-                        <button class="action " on:click={() => eventView(event.id)}>
-                            <Eye color="var(--green)" />
-                        </button>
-                        <button class="action" on:click={() => eventRemove(event.id)}>
-                            <Trash2 color="var(--green)" />
-                        </button>
-                    </div>
-                </td>
-            </tr>
-        {/each}
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Date</th>
+			<th>Location</th>
+			<th>Description</th>
+			<th>Prize</th>
+			<th>Prize Count</th>
+			<th>Status</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{#each data.events as event}
+			<tr>
+				<td>{event.name}</td>
+				<td>{event.date}</td>
+				<td>{event.location}</td>
+				<td>{event.description}</td>
+				<td>{event.prize}</td>
+				<td>{event.prizecount}</td>
+				<td>{event.active == true ? 'Active' : 'Inactive'}</td>
+				<td>
+					<div class="actions">
+						<button class="action" on:click={() => eventView(event.id)}>
+							<Eye color="var(--green)" />
+						</button>
+						<button class="action" on:click={() => eventRemove(event.id)}>
+							<Trash2 color="var(--green)" />
+						</button>
+					</div>
+				</td>
+			</tr>
+		{/each}
 
-        {#if data.events.length == 0}
-            <tr>
-                <td colspan="8">No events found.</td>
-            </tr>
-        {/if}
-    </tbody>
+		{#if data.events.length == 0}
+			<tr>
+				<td colspan="8">No events found.</td>
+			</tr>
+		{/if}
+	</tbody>
 </table>

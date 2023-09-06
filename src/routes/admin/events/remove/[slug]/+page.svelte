@@ -1,6 +1,6 @@
 <button class="cspp">
-    <i class="fa fa-arrow-left"></i>
-    Back
+	<i class="fa fa-arrow-left" />
+	Back
 </button>
 
 <h1 class="title large">Item Removed.</h1>

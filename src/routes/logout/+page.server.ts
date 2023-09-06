@@ -6,9 +6,9 @@ import { config } from 'dotenv';
 config();
 
 export const load: PageServerLoad = async ({ request, cookies }) => {
-    // Remove 'player' cookie
-    cookies.delete('player');
+	// Remove 'player' cookie
+	cookies.delete('player');
 
-    cookies.set('message', 'Logged out Successfully', { path: '/' });
-    throw redirect(307, '/')
-}
+	cookies.set('message', 'Logged out Successfully', { path: '/' });
+	throw redirect(307, '/');
+};

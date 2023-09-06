@@ -8,35 +8,39 @@ import { config } from 'dotenv';
 config();
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+	connectionString: process.env.DATABASE_URL
 });
 
 export const load = (async ({ params, cookies }) => {
-    let slug = params.slug;
+	let slug = params.slug;
 
-    // Check the event exists
-    let event = Object.create(null);
+	// Check the event exists
+	let event = Object.create(null);
 
-    event = await pool.query(`
+	event = await pool.query(
+		`
         SELECT * FROM events
         WHERE id = $1
-    `, [slug]);
+    `,
+		[slug]
+	);
 
-    // If it doesn't set cookie and redirect
-    if(Object.keys(event.rows).length === 0) {
-        cookies.set('message', 'Event not found', { path: '/admin/events' });
-        throw redirect(301, '/admin/events')
-    }
-    else {
-        // Delete event
-        const result = await pool.query(`
+	// If it doesn't set cookie and redirect
+	if (Object.keys(event.rows).length === 0) {
+		cookies.set('message', 'Event not found', { path: '/admin/events' });
+		throw redirect(301, '/admin/events');
+	} else {
+		// Delete event
+		const result = await pool.query(
+			`
             DELETE FROM events
             WHERE id = $1
-        `, [slug]);
+        `,
+			[slug]
+		);
 
-        cookies.set('message', 'Event deleted', { path: '/admin/events' });
+		cookies.set('message', 'Event deleted', { path: '/admin/events' });
 
-        throw redirect(307, '/admin/events')
-    }
-
+		throw redirect(307, '/admin/events');
+	}
 }) satisfies PageServerLoad;

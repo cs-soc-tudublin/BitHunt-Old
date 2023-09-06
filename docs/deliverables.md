@@ -3,8 +3,9 @@
 This is the list of all features that are required for the project to be considered complete.
 
 ## Broad Features
-- [ ] Players
-- [ ] Admins
+
+- [x] Players
+- [x] Admins
 - [ ] Dynamic Stages
 - [ ] Scan QR-Codes in-app
 - [ ] Puzzle solving
@@ -12,52 +13,55 @@ This is the list of all features that are required for the project to be conside
 - [ ] Multiple Events support
 - [ ] GDPR Compliance
 
-
-
 ## Database Tables
 
 Players:
-- [X] Name
-- [X] StudentID
-- [X] Privacy
-- [X] Event
-- [X] Score
+
+- [x] Name
+- [x] StudentID
+- [x] Privacy
+- [x] Event
+- [x] Score
 
 Stages:
-- [X] ID
-- [X] Clue (To get to this stage)
-- [X] Name
-- [X] Event
-- [X] PuzzleType
+
+- [x] ID
+- [x] Clue (To get to this stage)
+- [x] Name
+- [x] Event
+- [x] PuzzleType
 
 Puzzles:
-- [X] ID
-- [X] Event
-- [X] Type
-- [X] Puzzle
+
+- [x] ID
+- [x] Event
+- [x] Type
+- [x] Puzzle
 
 Leaderboards:
-- [X] StudentID
-- [X] [ Array of Stage IDs ]
+
+- [x] StudentID
+- [x] [ Array of Stage IDs ]
 
 Overall:
-- [X] Amount of Students
-- [X] Amount of Stages
-- [X] Total Prizes
-- [X] Amount of Remaining Prizes
-- [X] Total Amount of Completed Stages
+
+- [x] Amount of Students
+- [x] Amount of Stages
+- [x] Total Prizes
+- [x] Amount of Remaining Prizes
+- [x] Total Amount of Completed Stages
 
 Events List:
-- [X] EventID
-- [X] Event Name
-- [X] Event Date
-- [X] Active
 
-
+- [x] EventID
+- [x] Event Name
+- [x] Event Date
+- [x] Active
 
 ## UI Features
 
 ### Player UI
+
 - [ ] QR Code Parsing
 - [ ] Account Creation
 - [ ] Cookie Storing
@@ -65,8 +69,9 @@ Events List:
 - [ ] Logout
 
 ### Admin UI
+
 - [ ] Create, Edit & Set Active events
-- [X] Cookie Storing
+- [x] Cookie Storing
 - [ ] Create & Edit Stages
 - [ ] Create & Edit Puzzles
 - [ ] See Leaderboard

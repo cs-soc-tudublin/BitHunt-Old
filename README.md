@@ -7,6 +7,7 @@ Stages are found by scanning QR Codes, which are generated for each stage.
 It was originally developed for CS++'s Freshers Treasure Hunt 2023.
 
 ## Features
+
 - Player registration (by StudentID)
 - Leaderboard
 - Modular Stages
@@ -16,12 +17,15 @@ It was originally developed for CS++'s Freshers Treasure Hunt 2023.
 - Overall Game Stats
 
 ## Installation
+
 ### Prerequisites
+
 - Node.js
 - NPM
 - PostgreSQL
 
 ### Steps
+
 1. Create a new PostgreSQL database.
 
 ```sql
@@ -60,4 +64,5 @@ npm run dev
 8. You're good to go!
 
 ## Documentation
+
 The documentation for BitHunt can be found in the [docs]('docs') directory.
