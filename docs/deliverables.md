@@ -63,14 +63,14 @@ Events List:
 ### Player UI
 
 - [ ] QR Code Parsing
-- [ ] Account Creation
-- [ ] Cookie Storing
-- [ ] Access to Privacy Policy
-- [ ] Logout
+- [X] Account Creation
+- [X] Cookie Storing
+- [X] Access to Privacy Policy
+- [X] Logout
 
 ### Admin UI
 
-- [ ] Create, Edit & Set Active events
+- [X] Create, Edit & Set Active events
 - [x] Cookie Storing
 - [ ] Create & Edit Stages
 - [ ] Create & Edit Puzzles
