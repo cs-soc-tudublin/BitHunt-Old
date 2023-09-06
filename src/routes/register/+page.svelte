@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { ActionData } from './$types';
 
+    import { ChevronLeft, UserPlus } from 'lucide-svelte';
+
     export let form: ActionData;
 
     import Toasts from "$lib/toasts/Toasts.svelte";
@@ -25,7 +27,7 @@
 <h1 class="title large"> Create an Account</h1>
 
 <button class="cspp" on:click={() => window.location.href = '/'}>
-    <i class="fa fa-arrow-left"></i>
+    <ChevronLeft color="var(--green)" />
     Go Back
 </button>
 
@@ -59,7 +61,7 @@
     </label>
 
     <button class="cspp form-element">
-        <i class="fa fa-user"></i>
+        <UserPlus color="var(--green)" />
         Register
     </button>
 </form>

@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { PageData, ActionData } from './$types';
 
+    import { Calendar, Split, Puzzle, Crown, BookMarked, LogOut, LogIn, Home } from 'lucide-svelte';
+
     import Toasts from "$lib/toasts/Toasts.svelte";
     import { addToast } from "$lib/toasts/store.js";
 
@@ -68,11 +70,11 @@
     <form method="POST" action="?/login">
         <input type="password" name="password" class="form-medium" placeholder="Password" />
         <button class="cspp form-element" type="submit">
-            <i class="fa fa-sign-in"></i>
+            <LogIn color="var(--green)" />
             Log in
         </button>
         <button class="cspp" type="button" on:click={() => window.location.href = '/'}>
-            <i class="fa fa-arrow-left"></i>
+            <Home color="var(--green)" />
             Go Home
         </button>
     </form>
@@ -81,34 +83,34 @@
 
     <div class="buttons">
         <button class="cspp"  on:click={() => window.location.href = "/admin/events"}>
-            <i class="fa fa-calendar"></i>
+            <Calendar color="var(--green)" />
             Events
         </button>
 
         <button class="cspp" on:click={() => window.location.href = "/admin/stages"}>
-            <i class="fa fa-code-fork"></i>
+            <Split color="var(--green)" />
             Stages
         </button>
 
         <button class="cspp" on:click={() => window.location.href = "/admin/puzzles"}>
-            <i class="fa fa-puzzle-piece"></i>
+            <Puzzle color="var(--green)" />
             Puzzles
         </button>
 
         <button class="cspp" on:click={() => window.location.href = "/admin/leaderboard"}>
-            <i class="fa fa-trophy"></i>
+            <Crown color="var(--green)" />
             Leaderboard
         </button>
 
         <button class="cspp" on:click={() => window.location.href = "/admin/leaderboard"}>
-            <i class="fa fa-book"></i>
+            <BookMarked color="var(--green)" />
             Overall
         </button>
     </div>
 
     <form method="post" class="nocss" action="?/logout">
         <button class="cspp" formaction="?/logout">
-            <i class="fa fa-sign-out"></i>
+            <LogOut color="var(--green)" />
             Log Out
         </button>
     </form>

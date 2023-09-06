@@ -36,7 +36,7 @@ export const actions = {
                 secure: false
             })
 
-            throw redirect(301, '/stage');
+            throw redirect(307, '/stage');
 
         }
         else{

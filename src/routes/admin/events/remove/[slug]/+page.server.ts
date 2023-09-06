@@ -36,7 +36,7 @@ export const load = (async ({ params, cookies }) => {
 
         cookies.set('message', 'Event deleted', { path: '/admin/events' });
 
-        throw redirect(301, '/admin/events')
+        throw redirect(307, '/admin/events')
     }
 
 }) satisfies PageServerLoad;

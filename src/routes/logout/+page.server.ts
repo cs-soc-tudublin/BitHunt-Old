@@ -10,5 +10,5 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
     cookies.delete('player');
 
     cookies.set('message', 'Logged out Successfully', { path: '/' });
-    throw redirect(301, '/')
+    throw redirect(307, '/')
 }

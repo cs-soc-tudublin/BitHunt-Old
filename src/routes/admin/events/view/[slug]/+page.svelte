@@ -1,8 +1,9 @@
 <script lang="ts">
-    import type { PageData, ActionData } from './$types';
+    import type { PageData } from './$types';
+
+    import { ChevronLeft, Pencil, Save} from 'lucide-svelte';
     
     export let data: PageData;
-    export let form: ActionData;
 
     let disabled = true;
     let isActive = false;
@@ -27,12 +28,12 @@
 
 <div class="buttons">
     <button class="cspp" on:click={() => window.location.href = "/admin/events"}>
-        <i class="fa fa-arrow-left"></i>
+        <ChevronLeft color="var(--green)" />
         Back
     </button>
 
     <button class="cspp" on:click={() => toggleEdit()}>
-        <i class="fa fa-pencil"></i>
+        <Pencil color="var(--green)" />
         Edit {data.event.name}
     </button>
 </div>
@@ -86,7 +87,7 @@
     </select>
 
     <button class="cspp" {disabled}>
-        <i class="fa fa-calendar-check-o"></i>
+        <Save color="var(--green)" />
         Save
     </button>
 

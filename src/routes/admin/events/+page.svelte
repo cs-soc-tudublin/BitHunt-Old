@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { PageData } from './$types';
 
+    import { ChevronLeft, PlusCircle, Eye, Trash2 } from 'lucide-svelte';
+
     import Toasts from "$lib/toasts/Toasts.svelte";
     import { addToast } from "$lib/toasts/store.js";
     
@@ -51,11 +53,11 @@
 
 <div class="buttons">
     <button class="cspp" on:click={() => window.location.href = "/admin"}>
-        <i class="fa fa-arrow-left"></i>
+        <ChevronLeft color="var(--green)" />
         Go Back
     </button>
     <button class="cspp" on:click={() => window.location.href = "/admin/events/create"}>
-        <i class="fa fa-calendar-plus-o"></i>
+        <PlusCircle color="var(--green)" />
         Add New
     </button>
 </div>
@@ -86,10 +88,10 @@
                 <td>
                     <div class="actions">
                         <button class="action " on:click={() => eventView(event.id)}>
-                            <i class="fa fa-eye"></i>
+                            <Eye color="var(--green)" />
                         </button>
                         <button class="action" on:click={() => eventRemove(event.id)}>
-                            <i class="fa fa-trash"></i>
+                            <Trash2 color="var(--green)" />
                         </button>
                     </div>
                 </td>

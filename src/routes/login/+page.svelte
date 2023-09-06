@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { ActionData } from './$types';
 
+    import { ChevronLeft, LogIn } from 'lucide-svelte';
+
     export let form: ActionData;
 
     import Toasts from "$lib/toasts/Toasts.svelte";
@@ -24,6 +26,11 @@
 
 <h1 class="title large">Log Back In</h1>
 
+<button class="cspp" on:click={() => window.location.href = '/'}>
+    <ChevronLeft color="var(--green)" />
+    Go Back
+</button>
+
 <form method="post">
 
     <label for="studentid">
@@ -33,7 +40,7 @@
     <input type="text" name="studentid" id="studentid" placeholder="C12345678" required>
 
     <button class="cspp form-element">
-        <i class="fa fa-user"></i>
+        <LogIn color="var(--green)" />
         Log In
     </button>
 </form>

@@ -72,6 +72,6 @@ export const actions = {
             path: '/'
         })
 
-        throw redirect(301, '/admin');
+        throw redirect(307, '/admin');
     }
 } satisfies Actions;

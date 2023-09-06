@@ -3,6 +3,8 @@
 
     import Toasts from "$lib/toasts/Toasts.svelte";
     import { addToast } from "$lib/toasts/store.js";
+
+    import { ChevronLeft, PlusCircle } from 'lucide-svelte';
     
     export let form: ActionData;
 
@@ -28,7 +30,7 @@
 <h1 class="title large">Create an Event</h1>
 
 <button class="cspp form-element" on:click={() => window.location.href = "/admin/events"}>
-    <i class="fa fa-arrow-left"></i>
+    <ChevronLeft color="var(--green)" />
     Back
 </button>
 
@@ -79,7 +81,7 @@
     </select>
 
     <button type="submit" class="cspp form-element primary">
-        <i class="fa fa-calendar-plus-o"></i>
+        <PlusCircle color="var(--green)" />
         Create Event
     </button>
 
