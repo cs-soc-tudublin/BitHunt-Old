@@ -84,7 +84,7 @@
                 <td>{event.description}</td>
                 <td>{event.prize}</td>
                 <td>{event.prizecount}</td>
-                <td>{event.status}</td>
+                <td>{event.active}</td>
                 <td>
                     <div class="actions">
                         <button class="action " on:click={() => eventView(event.id)}>
