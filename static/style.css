@@ -478,11 +478,6 @@ input[disabled]{
     transition: 0.5s ease-in-out;
 }
 
-.passwordicon{
-    margin-left: -30px;
-    cursor: pointer;
-}
-
 .logo{
     width: 10%;
     height: auto;
@@ -499,26 +494,13 @@ input[disabled]{
     color: var(--white);
 }
 
-/* put at very bottom of page */
-footer{
-    width: auto;
-    height: 2.5rem;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 200;
-    text-align: center;
-    padding: 0.5rem;
-    text-shadow: inset 0 0 5px 5px var(--black);
-}
-
-.footerimg{
-    width: 1.75rem;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    vertical-align: middle;
-    display: inline;
-}
-
 svg{
     padding-right: 0.5rem;
+}
+
+.policy{
+    text-align: left;
+    height: 100%;
+    padding: 1rem;
+    overflow: auto;
 }
