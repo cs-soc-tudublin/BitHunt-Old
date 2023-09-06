@@ -27,7 +27,7 @@ export const load: PageServerLoad = async () => {
 
             return{
                 status: 200,
-                event: event
+                event: event,
             }
         }
     }
