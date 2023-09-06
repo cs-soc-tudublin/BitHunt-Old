@@ -11,8 +11,8 @@ Once complete, each route will be marked with a checkbox.
 ## Player Routes
 
 - [X] `/` - The main page of the game. This is where the player will be redirected to if they are not logged in.
-    - [ ] `/login` - The login page. This is where the player will be redirected to if they are not logged in.
-    - [ ] `/logout` - The logout page. This is where the player will be redirected to if choose to log out.
+    - [X] `/login` - The login page. This is where the player will be redirected to if they are not logged in.
+    - [X] `/logout` - The logout page. This is where the player will be redirected to if choose to log out.
     - [X] `/register` - The register page. This is where the player will be redirected to if they do not have an account.
     - [ ] `/privacy` - The privacy policy page. This is where the player will be redirected to if they want to view the privacy policy.
     - [ ] `/stage` - The stage main page, here they will scan the QR Codes to be redirected to a specific stage.

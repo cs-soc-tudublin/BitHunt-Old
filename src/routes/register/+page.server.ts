@@ -69,7 +69,10 @@ export const actions = {
         await pool.query(createQuery);
 
         // Set cookie
-        
+        cookies.set('player', reqData.get('studentid').toString().toLowerCase(), {
+            maxAge: 7200,
+            secure: false
+        })
 
         // Set message
         cookies.set('message', 'Account Created!', { path: '/stage' });

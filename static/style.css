@@ -518,3 +518,7 @@ footer{
     vertical-align: middle;
     display: inline;
 }
+
+svg{
+    padding-right: 0.5rem;
+}

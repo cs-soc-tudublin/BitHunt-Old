@@ -15,6 +15,9 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
     const cookie = cookies.get('player');
     let validCookie = false;
 
+    let message = cookies.get('message');
+    cookies.set('message', '', { path: '/' })
+
     // Check if cookie is valid
     if(cookie) {
         const player = await pool.query(`
@@ -44,7 +47,8 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
             return{
                 status: 200,
                 event: event,
-                validCookie: validCookie
+                validCookie: validCookie,
+                log: message
             }
         }
     }
@@ -52,7 +56,8 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
     if(!active){
         return {
             status: 404,
-            message: 'No active events'
+            message: 'No active events',
+            log: message
         }
     }
 }

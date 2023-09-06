@@ -6,8 +6,6 @@
     
     export let data: PageData;
 
-    let status = "Inactive";
-
     if(data.message == "Event not found"){
         addToast({
             message: data.message,

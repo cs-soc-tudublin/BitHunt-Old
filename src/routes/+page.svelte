@@ -1,6 +1,10 @@
 <script lang="ts">
     import type { PageData } from './$types';
+    import { DoorOpen, Crown, LogOut, LogIn, UserPlus } from 'lucide-svelte';
     import Thumb from "$lib/assets/bitthumb.svelte";
+
+    import Toasts from "$lib/toasts/Toasts.svelte";
+    import { addToast } from "$lib/toasts/store.js";
 
     export let data: PageData;
 
@@ -17,6 +21,15 @@
         }
     }
 
+    if(data.log == "Logged out Successfully"){
+        addToast({
+            message: data.log,
+            type: "success",
+            dismissible: true,
+            timeout: 5000
+        })
+    }
+
     export let register = () =>{
         window.location.href = "/register";
     },
@@ -29,6 +42,8 @@
     <title>BitHunt</title>
 </head>
 
+<Toasts />
+
 <Thumb />
 
 <h1 class="title verylarge nogap">BitHunt</h1>
@@ -38,17 +53,36 @@
 
     <h2 class="subtitle medium nogap"><strong>Today's Prize:</strong> One of {data.event.prizecount} {prize}!</h2>
 
-    <div class="buttons">
-        <button class="cspp" on:click={() => register()}>
-            <i class="fa fa-user-plus"></i>
-            Register
-        </button>
+    {#if data.validCookie == false}
+        <div class="buttons">
+            <button class="cspp" on:click={() => register()}>
+                <UserPlus color="var(--green)" />
+                Register
+            </button>
 
-        <button class="cspp" on:click={() => login()}>
-            <i class="fa fa-user"></i>
-            Login
-        </button>
-    </div>
+            <button class="cspp" on:click={() => login()}>
+                <LogIn color="var(--green)" />
+                Login
+            </button>
+        </div>
+    {:else}
+        <div class="buttons">
+            <button class="cspp" on:click={() => window.location.href = "/stage"}>
+                <DoorOpen color="var(--green)" />
+                Enter Event
+            </button>
+
+            <button class="cspp" on:click={() => window.location.href = "/leaderboard"}>
+                <Crown color="var(--green)" />
+                Leaderboard
+            </button>
+
+            <button class="cspp" on:click={() => window.location.href = "/logout"}>
+                <LogOut color="var(--green)" />
+                Logout
+            </button>
+        </div>
+    {/if}
 {:else}
     <h2 class="subtitle large nogap"><strong>No Event Today</strong></h2>
     <p class="subtitle medium nogap">Please check back later.</p>

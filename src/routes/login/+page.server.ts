@@ -1,4 +1,5 @@
-import type { PageServerLoad } from './$types';
+import type { Actions } from './$types';
+import { redirect } from '@sveltejs/kit';
 import pg from 'pg';
 const { Pool } = pg;
 
@@ -10,20 +11,41 @@ const pool = new Pool({
     connectionString: process.env.DATABASE_URL
 });
 
+export const actions = {
+    default: async ({ cookies, request }) => {
+        let reqData = await request.formData();
 
-export const load: PageServerLoad = async ({ cookies }) => {
-    // Get a list of all events
-    const events = await pool.query(`
-        SELECT *
-        FROM events
-    `);
+        // Returns as format:
+        // FormData {
+        //  "studentid" => "string"
+        // }
 
-    let message = cookies.get('message');
-    cookies.set('message', '', { path: '/admin/events' })
+        // Check if account exists
 
-    return {
-        status: 200,
-        events: events.rows,
-        message: message
-    };
-};
+        const checkQuery = {
+            text: 'SELECT * FROM Players WHERE studentid = $1',
+            values: [reqData.get('studentid')?.toString().toLowerCase()]
+        }
+
+        const checkResult = await pool.query(checkQuery);
+
+        if(checkResult.rowCount != 0) {
+            // Set cookie and redirect
+            cookies.set('player', reqData.get('studentid').toString().toLowerCase(), {
+                maxAge: 7200,
+                secure: false
+            })
+
+            throw redirect(301, '/stage');
+
+        }
+        else{
+            // Account doesn't exist
+            return {
+                status: 500,
+                message: 'Account does not exist'
+            }
+        }
+
+    }
+} satisfies Actions;
