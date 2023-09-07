@@ -14,14 +14,12 @@
 			"Clue": "TEXT",
 			"Name": "TEXT",
 			"Event": "TEXT",
-			"PuzzleType": "TEXT",
 			"UUID": "TEXT"
 		},
 
 		"Puzzles": {
 			"ID": "SERIAL PRIMARY KEY",
 			"Event": "TEXT",
-			"Type": "TEXT",
 			"Puzzle": "TEXT"
 		},
 
