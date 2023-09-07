@@ -5,7 +5,8 @@
 			"StudentID": "TEXT",
 			"Privacy": "BOOLEAN",
 			"Event": "TEXT",
-			"Score": "INTEGER"
+			"Score": "INTEGER",
+			"Target": "TEXT"
 		},
 
 		"Stages": {
@@ -13,7 +14,8 @@
 			"Clue": "TEXT",
 			"Name": "TEXT",
 			"Event": "TEXT",
-			"PuzzleType": "TEXT"
+			"PuzzleType": "TEXT",
+			"UUID": "TEXT"
 		},
 
 		"Puzzles": {

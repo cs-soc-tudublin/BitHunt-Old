@@ -42,7 +42,13 @@
 
 <Toasts />
 
-<h1 class="title large">Events</h1>
+<h1 class="title large nogap">Events</h1>
+
+<h2 class="subtitle medium nogap">
+	In BitHunt, each competition you want to run is an event. <br>
+	You can create as many events as you want, but only one can be active at a time. <br>
+	Players, Stages and Puzzles are all linked to an event. So if a Player registered for Event A, they'd have to register for Event B as well.
+</h2>
 
 <div class="buttons">
 	<button class="cspp" on:click={() => (window.location.href = '/admin')}>

@@ -187,6 +187,16 @@ input[type='radio'] {
 	font-family: 'IBM Plex Sans', sans-serif;
 }
 
+input[type='file']{
+	width: 100%;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	border: 2px solid var(--grey-4);
+	background-color: var(--grey-2);
+	color: var(--white);
+	font-family: 'IBM Plex Sans', sans-serif;
+}
+
 .switch {
 	font-size: 1rem;
 	position: relative;

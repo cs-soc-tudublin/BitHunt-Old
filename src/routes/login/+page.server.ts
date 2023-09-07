@@ -36,7 +36,7 @@ export const actions = {
 				secure: false
 			});
 
-			throw redirect(307, '/stage');
+			throw redirect(302, '/stage');
 		} else {
 			// Account doesn't exist
 			return {
