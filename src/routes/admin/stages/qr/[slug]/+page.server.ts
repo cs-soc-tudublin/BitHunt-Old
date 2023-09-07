@@ -1,4 +1,4 @@
-import type { PageServerLoad} from './$types';
+import type { PageServerLoad } from './$types';
 import pg from 'pg';
 const { Pool } = pg;
 
@@ -33,6 +33,6 @@ export const load: PageServerLoad = async ({ params }) => {
 	return {
 		status: 200,
 		name: stage.rows[0].name,
-		UUID: stage.rows[0].uuid,
+		UUID: stage.rows[0].uuid
 	};
 };

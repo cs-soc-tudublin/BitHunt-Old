@@ -26,11 +26,11 @@ Once complete, each route will be marked with a checkbox.
     - [x] `/admin/events/create` - The create event page, this is where admins can create a new event.
     - [x] `/admin/events/remove/:id` - The remove event page, this is where admins can remove an existing event.
     - [x] `/admin/events/view/:id` - The edit event page, this is where admins can edit an existing event.
-  - [X] `/admin/stages` - The stages page, this is where admins can view, create, edit and delete stages.
-    - [X] `/admin/stages/create` - The create stage page, this is where admins can create a new stage.
-    - [X] `/admin/stages/remove/:id` - The remove stage page, this is where admins can remove an existing stage.
-    - [X] `/admin/stages/view/:id` - The edit stage page, this is where admins can edit an existing stage.
-    - [X] `/admin/stages/qr/:id` - This is where admins can generate a QR Code for a stage.
+  - [x] `/admin/stages` - The stages page, this is where admins can view, create, edit and delete stages.
+    - [x] `/admin/stages/create` - The create stage page, this is where admins can create a new stage.
+    - [x] `/admin/stages/remove/:id` - The remove stage page, this is where admins can remove an existing stage.
+    - [x] `/admin/stages/view/:id` - The edit stage page, this is where admins can edit an existing stage.
+    - [x] `/admin/stages/qr/:id` - This is where admins can generate a QR Code for a stage.
   - [ ] `/admin/puzzles` - The puzzles page, this is where admins can view, create, edit and delete puzzles.
     - [ ] `/admin/puzzles/create` - The create puzzle page, this is where admins can create a new puzzle.
     - [ ] `/admin/puzzles/remove/:id` - The remove puzzle page, this is where admins can remove an existing puzzle.

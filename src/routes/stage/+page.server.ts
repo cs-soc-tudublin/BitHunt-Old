@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 	// Check if cookie is set
 	const cookie = cookies.get('player');
 	let validCookie = false;
-    const player;
+	let player;
 
 	// Check if cookie is valid
 	if (cookie) {
@@ -31,27 +31,26 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 
 		if (player.rows.length > 0) {
 			validCookie = true;
+		} else {
+			throw redirect(302, '/');
 		}
-        else{
-            throw redirect(302, '/');
-        }
 	}
 
-    // Get current target stage
-    const stage = await pool.query(
-        `
+	// Get current target stage
+	const stage = await pool.query(
+		`
             SELECT *
             FROM stages
             WHERE uuid = $1
         `,
-        [player.rows[0].target]
-    );
+		[player.rows[0].target]
+	);
 
-    return{
-        props: {
-            validCookie,
-            player: player.rows[0],
-            clue: stage.rows[0].clue
-        }
-    }
+	return {
+		props: {
+			validCookie,
+			player: player.rows[0],
+			clue: stage.rows[0].clue
+		}
+	};
 };

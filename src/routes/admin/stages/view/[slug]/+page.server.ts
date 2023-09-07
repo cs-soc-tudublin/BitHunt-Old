@@ -54,12 +54,7 @@ export const actions = {
             UPDATE stages
             SET name = $1, clue = $2, event = $3 WHERE id = $4
         `,
-			[
-				reqData.get('name'),
-				reqData.get('clue'),
-				reqData.get('event'),
-				reqData.get('id')
-			]
+			[reqData.get('name'), reqData.get('clue'), reqData.get('event'), reqData.get('id')]
 		);
 	}
 } satisfies Actions;

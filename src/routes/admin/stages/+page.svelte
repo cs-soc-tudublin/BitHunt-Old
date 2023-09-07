@@ -15,9 +15,9 @@
 				window.location.href = '/admin/stages/remove/' + id;
 			}
 		},
-        stageQR = (id: string) => {
-            window.location.href = '/admin/stages/qr/' + id;
-        };
+		stageQR = (id: string) => {
+			window.location.href = '/admin/stages/qr/' + id;
+		};
 </script>
 
 <head>
@@ -27,8 +27,8 @@
 <h1 class="title large nogap">Stages</h1>
 
 <h2 class="subtitle medium nogap">
-	In BitHunt, a 'Stage' is a challenge. <br>
-	Players will recieve a Clue, and must solve it to find the next Stage.<br>
+	In BitHunt, a 'Stage' is a challenge. <br />
+	Players will recieve a Clue, and must solve it to find the next Stage.<br />
 	Players must solve all Stages to complete the Event.
 </h2>
 
@@ -68,7 +68,7 @@
 						<button class="action" on:click={() => stageRemove(stage.id)}>
 							<Trash2 color="var(--green)" />
 						</button>
-                        <button class="action" on:click={() => stageQR(stage.id)}>
+						<button class="action" on:click={() => stageQR(stage.id)}>
 							<QrCode color="var(--green)" />
 						</button>
 					</div>

@@ -11,7 +11,6 @@ const pool = new Pool({
 	connectionString: process.env.DATABASE_URL
 });
 
-
 export const GET: RequestHandler = async ({ params, cookies }) => {
 	let slug = params.slug;
 
@@ -44,4 +43,4 @@ export const GET: RequestHandler = async ({ params, cookies }) => {
 
 		throw redirect(302, '/admin/stages');
 	}
-}
+};

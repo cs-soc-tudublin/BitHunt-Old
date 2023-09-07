@@ -48,7 +48,7 @@
 		Clue
 		<span class="required">*</span>
 	</label>
-	<input type="text" name="clue" id="clue" value={data.stage.clue} {disabled} required/>
+	<input type="text" name="clue" id="clue" value={data.stage.clue} {disabled} required />
 
 	<label for="Event">
 		Event

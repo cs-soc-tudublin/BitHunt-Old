@@ -12,7 +12,6 @@ const pool = new Pool({
 });
 
 export const load: PageServerLoad = async ({ request }) => {
-
 	let client = await pool.connect();
 	let result = await client.query('SELECT * FROM events');
 	let events = result.rows;

@@ -10,7 +10,7 @@ This is the list of all features that are required for the project to be conside
 - [ ] Scan QR-Codes to link to site.
 - [ ] Puzzle solving
 - [ ] Leaderboards
-- [X] Multiple Events support
+- [x] Multiple Events support
 - [ ] GDPR Compliance
 
 ## Database Tables
@@ -62,15 +62,15 @@ Events List:
 
 ### Player UI
 
-- [X] Account Creation
-- [X] Cookie Storing
-- [X] Access to Privacy Policy
-- [X] Logout
+- [x] Account Creation
+- [x] Cookie Storing
+- [x] Access to Privacy Policy
+- [x] Logout
 
 ### Admin UI
 
-- [X] Create, Edit & Set Active events
+- [x] Create, Edit & Set Active events
 - [x] Cookie Storing
-- [X] Create & Edit Stages
+- [x] Create & Edit Stages
 - [ ] Create & Edit Puzzles
 - [ ] See Leaderboard
