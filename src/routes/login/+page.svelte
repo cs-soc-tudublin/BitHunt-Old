@@ -27,7 +27,7 @@
 <h1 class="title large">Log Back In</h1>
 
 <button class="cspp" on:click={() => (window.location.href = '/')}>
-	<ChevronLeft color="var(--green)" />
+	<ChevronLeft color="var(--green)" size="32" />
 	Go Back
 </button>
 
@@ -39,7 +39,7 @@
 	<input type="text" name="studentid" id="studentid" placeholder="C12345678" required />
 
 	<button class="cspp form-element">
-		<LogIn color="var(--green)" />
+		<LogIn color="var(--green)" size="32" />
 		Log In
 	</button>
 </form>

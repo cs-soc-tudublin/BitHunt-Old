@@ -3,7 +3,7 @@
 </script>
 
 <button class="cspp">
-	<ChevronLeft color="var(--green)" />
+	<ChevronLeft color="var(--green)" size="32" />
 	Back
 </button>
 

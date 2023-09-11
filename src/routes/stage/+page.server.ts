@@ -36,6 +36,23 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 		}
 	}
 
+	// Check if target is null:
+	if (player.rows[0].target === null) {
+		await pool.query(
+			`
+			UPDATE players
+			SET target = (
+				SELECT UUID FROM stages
+				ORDER BY RANDOM()
+				LIMIT 1
+			)
+			WHERE studentid = $1
+		`,
+			[cookie]
+		);
+
+	}
+
 	// Get current target stage
 	const stage = await pool.query(
 		`
@@ -46,11 +63,10 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 		[player.rows[0].target]
 	);
 
+
 	return {
-		props: {
-			validCookie,
-			player: player.rows[0],
-			clue: stage.rows[0].clue
-		}
+		validCookie,
+		player: player.rows[0],
+		clue: stage.rows[0].clue
 	};
 };

@@ -25,12 +25,12 @@
 
 <div class="buttons">
 	<button class="cspp" on:click={() => (window.location.href = '/admin/stages')}>
-		<ChevronLeft color="var(--green)" />
+		<ChevronLeft color="var(--green)" size="32" />
 		Back
 	</button>
 
 	<button class="cspp" on:click={() => toggleEdit()}>
-		<Pencil color="var(--green)" />
+		<Pencil color="var(--green)" size="32" />
 		Edit {data.stage.name}
 	</button>
 </div>
@@ -61,7 +61,7 @@
 	</select>
 
 	<button class="cspp" {disabled}>
-		<Save color="var(--green)" />
+		<Save color="var(--green)" size="32" />
 		Save
 	</button>
 </form>

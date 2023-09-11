@@ -32,7 +32,7 @@
 </head>
 
 <button class="cspp" on:click={() => (window.location.href = '/admin/stages')}>
-	<ChevronLeft color="var(--green)" />
+	<ChevronLeft color="var(--green)" size="32" />
 	Go Back
 </button>
 

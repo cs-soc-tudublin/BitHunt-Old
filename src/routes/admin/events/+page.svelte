@@ -53,11 +53,11 @@
 
 <div class="buttons">
 	<button class="cspp" on:click={() => (window.location.href = '/admin')}>
-		<ChevronLeft color="var(--green)" />
+		<ChevronLeft color="var(--green)" size="32" />
 		Go Back
 	</button>
 	<button class="cspp" on:click={() => (window.location.href = '/admin/events/create')}>
-		<PlusCircle color="var(--green)" />
+		<PlusCircle color="var(--green)" size="32" />
 		Add New
 	</button>
 </div>
@@ -88,10 +88,10 @@
 				<td>
 					<div class="actions">
 						<button class="action" on:click={() => eventView(event.id)}>
-							<Eye color="var(--green)" />
+							<Eye color="var(--green)" size="32" />
 						</button>
 						<button class="action" on:click={() => eventRemove(event.id)}>
-							<Trash2 color="var(--green)" />
+							<Trash2 color="var(--green)" size="32" />
 						</button>
 					</div>
 				</td>

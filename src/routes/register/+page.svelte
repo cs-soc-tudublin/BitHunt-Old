@@ -27,7 +27,7 @@
 <h1 class="title large">Create an Account</h1>
 
 <button class="cspp" on:click={() => (window.location.href = '/')}>
-	<ChevronLeft color="var(--green)" />
+	<ChevronLeft color="var(--green)" size="32" />
 	Go Back
 </button>
 
@@ -61,7 +61,7 @@
 	</label>
 
 	<button class="cspp form-element">
-		<UserPlus color="var(--green)" />
+		<UserPlus color="var(--green)" size="32" />
 		Register
 	</button>
 </form>

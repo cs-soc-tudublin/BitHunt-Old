@@ -1,4 +1,3 @@
-import { redirect } from '@sveltejs/kit';
 import { databaseIntegrity } from '$lib/server/database';
 import type { PageServerLoad, Actions } from './$types';
 
@@ -64,13 +63,10 @@ export const actions = {
 		}
 	},
 	logout: async ({ cookies }) => {
-		console.log('logging out');
 		// Set cookie to false, with age of -1 (expires immediately)
 		cookies.set('admin', 'false', {
 			maxAge: -1,
 			path: '/'
 		});
-
-		throw redirect(307, '/admin');
 	}
 } satisfies Actions;

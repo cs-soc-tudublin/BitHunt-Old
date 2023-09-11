@@ -28,6 +28,7 @@ body {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
+	overflow: auto;
 }
 
 @keyframes gradient {
@@ -92,7 +93,7 @@ p {
 }
 
 div {
-	width: 95%;
+	width: 100%;
 }
 
 .exterior {
@@ -292,10 +293,6 @@ button {
 	font-weight: 700;
 	box-shadow: 5px 5px 5px 0 var(--black);
 	cursor: pointer;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 }
 
 label {
@@ -343,23 +340,24 @@ table {
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
-	border: 1px solid var(--grey-4);
-	background-color: var(--grey-3);
-	color: var(--white);
+	border: 1px solid var(--grey-4) !important;
+	background-color: var(--grey-3) !important;
+	color: var(--white)  !important;
 	font-family: 'IBM Plex Mono', monospace;
+	overflow-x: auto;
 }
 
 th {
 	text-align: left;
 	padding: 0.5rem;
-	background-color: var(--grey-2);
-	border: 1px solid var(--grey-4);
+	background-color: var(--grey-2) !important;
+	border: 1px solid var(--grey-4) !important;
 }
 
 td {
 	text-align: left;
 	padding: 0.5rem;
-	border: 1px solid var(--grey-4);
+	border: 1px solid var(--grey-4) !important;
 }
 
 .selectors {

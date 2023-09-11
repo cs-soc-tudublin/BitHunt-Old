@@ -44,49 +44,65 @@
 
 <Toasts />
 
-<Thumb />
+<div class="container">
+	<Thumb />
 
-<h1 class="title verylarge nogap">BitHunt</h1>
+	<h1 class="title verylarge nogap">BitHunt</h1>
 
-{#if data.status == 200}
-	<h2 class="subtitle medium nogap"><strong>Today's Event:</strong> {data.event.name}</h2>
+	{#if data.status == 200}
+		<div class="row justify-content-center">
+			<div class="col">
+				<h2 class="subtitle medium nogap"><strong>Today's Event:</strong> {data.event.name}</h2>
 
-	<h2 class="subtitle medium nogap">
-		<strong>Today's Prize:</strong> One of {data.event.prizecount}
-		{prize}!
-	</h2>
-
-	{#if data.validCookie == false}
-		<div class="buttons">
-			<button class="cspp" on:click={() => register()}>
-				<UserPlus color="var(--green)" />
-				Register
-			</button>
-
-			<button class="cspp" on:click={() => login()}>
-				<LogIn color="var(--green)" />
-				Login
-			</button>
+				<h2 class="subtitle medium nogap">
+					<strong>Today's Prize:</strong> One of {data.event.prizecount}
+					{prize}!
+				</h2>
+			</div>
 		</div>
+
+		{#if data.validCookie == false}
+			<div class="row justify-content-center">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-6">
+							<button class="cspp" on:click={() => register()}>
+								<UserPlus color="var(--green)" size="32"/>
+								Register
+							</button>
+						</div>
+						<div class="col-md-6">
+							<button class="cspp" on:click={() => login()}>
+								<LogIn color="var(--green)" size="32"/>
+								Login
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		{:else}
+			<div class="row justify-content-center">
+				<div class="container-fluid">
+					<div class="row justify-content-center">
+						<div class="col-lg-6">
+							<button class="cspp" on:click={() => (window.location.href = '/stage')}>
+								<DoorOpen color="var(--green)" size="32"/>
+								Enter Event
+							</button>
+						</div>
+
+						<div class="col-lg-6">
+							<button class="cspp" on:click={() => (window.location.href = '/logout')}>
+								<LogOut color="var(--green)" size="32"/>
+								Logout
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		{/if}
 	{:else}
-		<div class="buttons">
-			<button class="cspp" on:click={() => (window.location.href = '/stage')}>
-				<DoorOpen color="var(--green)" />
-				Enter Event
-			</button>
-
-			<button class="cspp" on:click={() => (window.location.href = '/leaderboard')}>
-				<Crown color="var(--green)" />
-				Leaderboard
-			</button>
-
-			<button class="cspp" on:click={() => (window.location.href = '/logout')}>
-				<LogOut color="var(--green)" />
-				Logout
-			</button>
-		</div>
+		<h2 class="subtitle large nogap"><strong>No Event Today</strong></h2>
+		<p class="subtitle medium nogap">Please check back later.</p>
 	{/if}
-{:else}
-	<h2 class="subtitle large nogap"><strong>No Event Today</strong></h2>
-	<p class="subtitle medium nogap">Please check back later.</p>
-{/if}
+</div>

@@ -31,7 +31,7 @@
 <h1 class="title large">Create a Stage</h1>
 
 <button class="cspp form-element" on:click={() => (window.location.href = '/admin/stages')}>
-	<ChevronLeft color="var(--green)" />
+	<ChevronLeft color="var(--green)" size="32" />
 	Back
 </button>
 
@@ -59,7 +59,7 @@
 	</select>
 
 	<button type="submit" class="cspp form-element primary">
-		<PlusCircle color="var(--green)" />
+		<PlusCircle color="var(--green)" size="32" />
 		Create Event
 	</button>
 </form>

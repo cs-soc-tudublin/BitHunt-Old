@@ -34,11 +34,11 @@
 
 <div class="buttons">
 	<button class="cspp" on:click={() => (window.location.href = '/admin')}>
-		<ChevronLeft color="var(--green)" />
+		<ChevronLeft color="var(--green)" size="32" />
 		Go Back
 	</button>
 	<button class="cspp" on:click={() => (window.location.href = '/admin/stages/create')}>
-		<PlusCircle color="var(--green)" />
+		<PlusCircle color="var(--green)" size="32" />
 		Add New
 	</button>
 </div>
@@ -63,13 +63,13 @@
 				<td>
 					<div class="actions">
 						<button class="action" on:click={() => stageView(stage.id)}>
-							<Eye color="var(--green)" />
+							<Eye color="var(--green)" size="32" />
 						</button>
 						<button class="action" on:click={() => stageRemove(stage.id)}>
-							<Trash2 color="var(--green)" />
+							<Trash2 color="var(--green)" size="32" />
 						</button>
 						<button class="action" on:click={() => stageQR(stage.id)}>
-							<QrCode color="var(--green)" />
+							<QrCode color="var(--green)" size="32" />
 						</button>
 					</div>
 				</td>

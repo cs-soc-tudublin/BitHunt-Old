@@ -66,47 +66,59 @@
 	<form method="POST" action="?/login">
 		<input type="password" name="password" class="form-medium" placeholder="Password" />
 		<button class="cspp form-element" type="submit">
-			<LogIn color="var(--green)" />
+			<LogIn color="var(--green)" size="32" />
 			Log in
 		</button>
 		<button class="cspp" type="button" on:click={() => (window.location.href = '/')}>
-			<Home color="var(--green)" />
+			<Home color="var(--green)" size="32" />
 			Go Home
 		</button>
 	</form>
 {:else}
 	<h2 class="subtitle medium">Chose an option:</h2>
 
-	<div class="buttons">
-		<button class="cspp" on:click={() => (window.location.href = '/admin/events')}>
-			<Calendar color="var(--green)" />
-			Events
-		</button>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+				<button class="cspp" on:click={() => (window.location.href = '/admin/events')}>
+					<Calendar color="var(--green)" size="32" />
+					Events
+				</button>
+			</div>
 
-		<button class="cspp" on:click={() => (window.location.href = '/admin/stages')}>
-			<Split color="var(--green)" />
-			Stages
-		</button>
+			<div class="col-lg-4">
+				<button class="cspp" on:click={() => (window.location.href = '/admin/stages')}>
+					<Split color="var(--green)" size="32" />
+					Stages
+				</button>
+			</div>
 
-		<button class="cspp" on:click={() => (window.location.href = '/admin/puzzles')}>
-			<Puzzle color="var(--green)" />
-			Puzzles
-		</button>
+			<div class="col-lg-4">
+				<button class="cspp" on:click={() => alert('Puzzles are not complete.')}>
+					<Puzzle color="var(--green)" size="32" />
+					Puzzles (WIP)
+				</button>
+			</div>
 
-		<button class="cspp" on:click={() => (window.location.href = '/admin/leaderboard')}>
-			<Crown color="var(--green)" />
-			Leaderboard
-		</button>
+			<div class="col-lg-6">
+				<button class="cspp" on:click={() => alert('Leaderboards are not complete.')}>
+					<Crown color="var(--green)" size="32" />
+					Leaderboard (WIP)
+				</button>
+			</div>
 
-		<button class="cspp" on:click={() => (window.location.href = '/admin/leaderboard')}>
-			<BookMarked color="var(--green)" />
-			Overall
-		</button>
+			<div class="col-lg-6">
+				<button class="cspp" on:click={() => (window.location.href = '/admin/overall')}>
+					<BookMarked color="var(--green)" size="32" />
+					Overall
+				</button>
+			</div>
+		</div>
 	</div>
 
 	<form method="post" class="nocss" action="?/logout">
-		<button class="cspp" formaction="?/logout">
-			<LogOut color="var(--green)" />
+		<button class="cspp">
+			<LogOut color="var(--green)" size="32" />
 			Log Out
 		</button>
 	</form>
