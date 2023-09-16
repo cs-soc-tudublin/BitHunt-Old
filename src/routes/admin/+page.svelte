@@ -117,7 +117,7 @@
 	</div>
 
 	<form method="post" class="nocss" action="?/logout">
-		<button class="cspp">
+		<button class="cspp" >
 			<LogOut color="var(--green)" size="32" />
 			Log Out
 		</button>

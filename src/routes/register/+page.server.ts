@@ -83,6 +83,6 @@ export const actions = {
 		// Set message
 		cookies.set('message', 'Account Created!', { path: '/stage' });
 
-		throw redirect(307, '/stage');
+		throw redirect(302, '/stage');
 	}
 } satisfies Actions;

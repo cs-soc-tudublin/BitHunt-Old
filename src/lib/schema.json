@@ -1,12 +1,14 @@
 {
 	"Tables": {
 		"Players": {
+			"ID":"SERIAL PRIMARY KEY",
 			"Name": "TEXT",
 			"StudentID": "TEXT",
 			"Privacy": "BOOLEAN",
 			"Event": "TEXT",
 			"Score": "INTEGER",
-			"Target": "TEXT"
+			"Target": "TEXT",
+			"CompletedStages": "TEXT"
 		},
 
 		"Stages": {
@@ -46,6 +48,15 @@
 			"Prize": "TEXT",
 			"PrizeCount": "INTEGER",
 			"Active": "BOOLEAN"
+		},
+
+		"Playerstages":{
+			"PlayerStagesID": "SERIAL PRIMARY KEY",
+			"StudentID": "INT REFERENCES Players(ID)",
+			"Event": "TEXT",
+			"StageID": "INT REFERENCES Stages(ID)",
+			"isCompleted": "BOOLEAN DEFAULT FALSE"
+
 		}
 	}
 }

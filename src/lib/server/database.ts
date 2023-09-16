@@ -80,6 +80,8 @@ export const databaseIntegrity = async (databaseURL: any) => {
 		// Add closing bracket
 		queryString += ');';
 
+		console.log(queryString);
+
 		// Execute query
 		await client.query(queryString);
 	}
