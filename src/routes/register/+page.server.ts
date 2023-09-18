@@ -74,6 +74,15 @@ export const actions = {
 
 		await pool.query(createQuery);
 
+		let player = await pool.query(
+			`
+			SELECT *
+			FROM players
+			WHERE studentid = $1
+		`,
+			[reqData.get('studentid').toString().toLowerCase()]
+		);
+
 		// Check if target is null:
 		if (player.rows[0].target === null) {
 			await pool.query(
@@ -86,7 +95,7 @@ export const actions = {
 				)
 				WHERE studentid = $1
 			`,
-				[cookie]
+				[reqData.get('studentid').toString().toLowerCase()]
 			);
 
 		}
@@ -112,7 +121,7 @@ export const actions = {
 				)
 				WHERE studentid = $1
 			`,
-				[cookie]
+				[reqData.get('studentid').toString().toLowerCase()]
 			);
 		}
 

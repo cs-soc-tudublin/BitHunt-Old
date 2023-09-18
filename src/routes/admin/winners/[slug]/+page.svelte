@@ -20,6 +20,7 @@
             </p>
 
             <form method="post">
+                <input type="hidden" name="studentid" value="{data.studentid}" />
                 <button class="cspp">
                     <Trophy color="var(--green)" size="32" />
                     They recieved their prize

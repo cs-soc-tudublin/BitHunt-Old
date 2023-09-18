@@ -127,28 +127,25 @@ export const actions = {
             [completed.join(','), cookies.get('player')]
         );
 
+
         // Check list of completed stages and select a random from the stages table that isn't in the list
         let nextStage = Object.create(null);
 
-        nextStage = await pool.query(
-            `
-            SELECT * FROM stages
-            WHERE uuid NOT IN ($1)
-            ORDER BY RANDOM()
-            LIMIT 1
-        `,
-            [completed.join(',')]
-        );
+        let queryString = 'SELECT * FROM stages WHERE uuid NOT IN (';
 
-        // Update the target stage       
-        await pool.query(
-            `
-            UPDATE players
-            SET target = $1
-            WHERE studentid = $2
-        `,
-            [nextStage.rows[0].uuid, cookies.get('player')]
-        );
+        for(let i = 0; i < completed.length; i++){
+            queryString += `'` + completed[i] + `'`;
+
+            if(i !== completed.length - 1){
+                queryString += `, `;
+            }
+        }
+
+        queryString = queryString.slice(0, -1) + `') ORDER BY RANDOM() LIMIT 1`;
+
+        console.log(queryString);
+
+        nextStage = await pool.query(queryString);
 
         // Increase Player score by 1
         await pool.query(
@@ -158,6 +155,35 @@ export const actions = {
             WHERE studentid = $1
         `,
             [cookies.get('player')]
+        );
+
+        // Check length of nextStage
+        if(nextStage.rows.length === 0){
+            // No more stages left
+            let stages = Object.create(null);
+
+            stages = await pool.query(
+                `
+                SELECT * FROM stages
+            `
+            );
+
+            await pool.query(
+                'UPDATE players SET finishedevent = true WHERE studentid = $1',
+                [cookies.get('player')]
+            );
+
+            throw redirect(302, '/win/' + cookies.get('player'));
+        }
+
+        // Update the target stage       
+        await pool.query(
+            `
+            UPDATE players
+            SET target = $1
+            WHERE studentid = $2
+        `,
+            [nextStage.rows[0].uuid, cookies.get('player')]
         );
 
         throw redirect(302, `/stage`);

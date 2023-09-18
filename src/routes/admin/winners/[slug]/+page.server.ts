@@ -1,4 +1,5 @@
 import type { PageServerLoad, Actions } from './$types';
+import { redirect } from '@sveltejs/kit';
 import pg from 'pg';
 const { Pool } = pg;
 
@@ -30,78 +31,57 @@ export const load: PageServerLoad = async ({ params }) => {
 		};
 	}
 
-    console.log(player.rows[0]);
-
-    if(player.rows[0].finishedevent){
-
-        return{
-            status: 200,
-            name: player.rows[0].name,
-            winner: 2
-        }
-    }
-    else{
-        const eventCount = await pool.query(
-            'SELECT count(*) from events'
-        );
-        if(eventCount > player.rows[0].score){
-            return {
-                status: 200,
-                name: player.rows[0].name,
-                winner: 0
-            }
-        }
-        else{
-            return {
-                status: 200,
-                name: player.rows[0].name,
-                winner: 1
-            }
-        }
-    }
-
-    return{
-        status: 200,
-        name: player.rows[0].name,
-        winner: 0
-    }
+	if(player.rows[0].finishedevent){
+		if(player.rows[0].score == -1){
+			return {
+				status: 200,
+				name: player.rows[0].name,
+				studentid: player.rows[0].studentid,
+				winner: 2
+			}
+		}
+		else{
+			return {
+				status: 200,
+				name: player.rows[0].name,
+				studentid: player.rows[0].studentid,
+				winner: 1
+			}
+		}
+	}
+	else{
+		return {
+			status: 200,
+			name: player.rows[0].name,
+			studentid: player.rows[0].studentid,
+			winner: 0
+		}
+	}
 };
 
 export const actions = {
-	login: async ({ cookies, request }) => {
+	default: async ({ cookies, request }) => {
 		let reqData = await request.formData();
 
 		// Returns as format:
 		// FormData {
-		//  "password" => "string"
+		//  "studentid" => "string"
 		// }
 
-		// Check if password is correct from .env file
-		if (reqData.get('password') === process.env.ADMIN_PASSWORD) {
-			// Set cookie to true, with age of 2 hours
-			cookies.set('admin', 'true', {
-				maxAge: 7200,
-				secure: false
-			});
+		let studentid = reqData.get('studentid');
 
-			// Return success
-			return {
-				status: 200,
-				message: 'Successfully logged in'
-			};
-		} else {
-			// Return failure
-			return {
-				status: 500,
-				message: 'Incorrect password'
-			};
-		}
-	},
-	logout: async ({ cookies }) => {
-		// Set cookie to false, with age of -1 (expires immediately)
-		cookies.set('admin', 'false', {
-			maxAge: -1,
-			path: '/'
-		});
+		let player = Object.create(null);
+
+		// We know that the student exists, so set the score to -1 to indicate that they have finished the event
+		player = await pool.query(
+			`
+			UPDATE players
+			SET score = -1, finishedevent = true
+			WHERE studentid = $1
+		`,
+			[studentid]
+		);
+
+		throw redirect(302, '/admin');
 	}
 } satisfies Actions;

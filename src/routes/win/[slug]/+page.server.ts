@@ -43,7 +43,7 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 
     console.log(player.rows[0].score)
 
-    if (player.rows[0].score === stages.rows.length) {
+    if (player.rows[0].score >= stages.rows.length) {
         return {
             status: 200,
             message: 'You win!',

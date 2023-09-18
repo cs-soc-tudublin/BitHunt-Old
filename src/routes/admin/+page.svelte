@@ -108,9 +108,9 @@
 			</div>
 
 			<div class="col-lg-6">
-				<button class="cspp" on:click={() => (window.location.href = '/admin/overall')}>
+				<button class="cspp" on:click={() => alert('Overall is not complete!')}>
 					<BookMarked color="var(--green)" size="32" />
-					Overall
+					Overall (WIP)
 				</button>
 			</div>
 		</div>
