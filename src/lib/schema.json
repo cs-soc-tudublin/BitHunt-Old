@@ -8,7 +8,8 @@
 			"Event": "TEXT",
 			"Score": "INTEGER",
 			"Target": "TEXT",
-			"CompletedStages": "TEXT"
+			"CompletedStages": "TEXT",
+			"FinishedEvent": "BOOL DEFAULT FALSE"
 		},
 
 		"Stages": {

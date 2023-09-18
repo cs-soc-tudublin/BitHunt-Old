@@ -45,6 +45,11 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 	);
 
 	if (player.rows[0].score === stages.rows.length) {
+		await pool.query(
+			'UPDATE players SET finishedevent = true WHERE studentid = $1',
+			[cookie]
+		);
+
 		throw redirect(302, '/win/' + cookie);
 	}
 

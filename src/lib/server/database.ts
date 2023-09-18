@@ -36,6 +36,8 @@ export const databaseIntegrity = async (databaseURL: any) => {
             schemaname != 'information_schema'
     `);
 
+	console.log(res);
+
 	// Create list of all tables in db
 	let tables = [];
 	for (const row of res.rows) {

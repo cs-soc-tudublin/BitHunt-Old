@@ -74,6 +74,48 @@ export const actions = {
 
 		await pool.query(createQuery);
 
+		// Check if target is null:
+		if (player.rows[0].target === null) {
+			await pool.query(
+				`
+				UPDATE players
+				SET target = (
+					SELECT UUID FROM stages
+					ORDER BY RANDOM()
+					LIMIT 1
+				)
+				WHERE studentid = $1
+			`,
+				[cookie]
+			);
+
+		}
+
+		// Check if target exists
+		const target = await pool.query(
+			`
+				SELECT *
+				FROM stages
+				WHERE uuid = $1
+			`,
+			[player.rows[0].target]
+		);
+
+		if (target.rows.length === 0) {
+			await pool.query(
+				`
+				UPDATE players
+				SET target = (
+					SELECT UUID FROM stages
+					ORDER BY RANDOM()
+					LIMIT 1
+				)
+				WHERE studentid = $1
+			`,
+				[cookie]
+			);
+		}
+
 		// Set cookie
 		cookies.set('player', reqData.get('studentid').toString().toLowerCase(), {
 			maxAge: 7200,
