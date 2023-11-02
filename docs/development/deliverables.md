@@ -6,12 +6,12 @@ This is the list of all features that are required for the project to be conside
 
 - [x] Players
 - [x] Admins
-- [ ] Dynamic Stages
-- [ ] Scan QR-Codes to link to site.
+- [X] Dynamic Stages
+- [X] Scan QR-Codes to link to site.
 - [ ] Puzzle solving
 - [ ] Leaderboards
 - [x] Multiple Events support
-- [ ] GDPR Compliance
+- [X] GDPR Compliance
 
 ## Database Tables
 
@@ -72,5 +72,5 @@ Events List:
 - [x] Create, Edit & Set Active events
 - [x] Cookie Storing
 - [x] Create & Edit Stages
-- [ ] Create & Edit Puzzles
+- [X] Create & Edit Puzzles
 - [ ] See Leaderboard
