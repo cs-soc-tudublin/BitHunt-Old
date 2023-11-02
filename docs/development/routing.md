@@ -15,8 +15,8 @@ Once complete, each route will be marked with a checkbox.
   - [x] `/logout` - The logout page. This is where the player will be redirected to if choose to log out.
   - [x] `/register` - The register page. This is where the player will be redirected to if they do not have an account.
   - [x] `/privacy` - The privacy policy page. This is where the player will be redirected to if they want to view the privacy policy.
-  - [ ] `/stage` - The stage main page, here they will see their current clue.
-    - [ ] `/stage/:id` - This is where players are sent when they scan a QR Code, here they solve a puzzle and are given a clue to the next stage.
+  - [X] `/stage` - The stage main page, here they will see their current clue.
+    - [X] `/stage/:id` - This is where players are sent when they scan a QR Code, here they solve a puzzle and are given a clue to the next stage.
   - [ ] `/leaderboard` - The leaderboard page. This is where the player will be redirected to if they want to view the leaderboard. Users not willing to share their Names will be given 'Anonymous [Duck Species]' as a placeholder.
 
 ## Admin Routes
