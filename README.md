@@ -65,4 +65,4 @@ npm run dev
 
 ## Documentation
 
-The documentation for BitHunt can be found in the [docs]('docs') directory.
+The documentation for BitHunt can be found in the [docs](docs) directory.
