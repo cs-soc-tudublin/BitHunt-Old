@@ -31,7 +31,7 @@ model Stages {
   Clue  String
   Name  String
   Event String
-  UUID  String
+  UUID  String    @unique
   Playerstages    Playerstages[]
 }
 

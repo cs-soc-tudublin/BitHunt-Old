@@ -2,23 +2,7 @@
 	import type { ActionData } from './$types';
 
 	import { ChevronLeft, UserPlus } from 'lucide-svelte';
-
-	export let form: ActionData;
-
-	import Toasts from '$lib/toasts/Toasts.svelte';
-	import { addToast } from '$lib/toasts/store.js';
-
-	if (form?.status == 500) {
-		addToast({
-			message: form.message,
-			type: 'error',
-			dismissible: true,
-			timeout: 5000
-		});
-	}
 </script>
-
-<Toasts />
 
 <head>
 	<title>BitHunt - Create Account</title>

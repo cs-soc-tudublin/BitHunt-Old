@@ -8,23 +8,14 @@
 	let prize = '';
 
 	if (data.status == 200) {
-		if (data.event.prizecount > 1) {
+		if (data.event && data.event?.PrizeCount > 1) {
 			// Check if last letter is 's'
-			if (data.event.prize.slice(-1) == 's') {
-				prize = data.event.prize + 'es';
+			if (data.event?.Prize.slice(-1) == 's') {
+				prize = data.event?.Prize + 'es';
 			} else {
-				prize = data.event.prize + 's';
+				prize = data.event?.Prize + 's';
 			}
 		}
-	}
-
-	if (data.log == 'Logged out Successfully') {
-		addToast({
-			message: data.log,
-			type: 'success',
-			dismissible: true,
-			timeout: 5000
-		});
 	}
 
 	export let register = () => {
@@ -47,10 +38,10 @@
 	{#if data.status == 200}
 		<div class="row justify-content-center">
 			<div class="col">
-				<h2 class="subtitle medium nogap"><strong>Today's Event:</strong> {data.event.name}</h2>
+				<h2 class="subtitle medium nogap"><strong>Today's Event:</strong> {data.event?.Name}</h2>
 
 				<h2 class="subtitle medium nogap">
-					<strong>Today's Prize:</strong> One of {data.event.prizecount}
+					<strong>Today's Prize:</strong> One of {data.event?.PrizeCount}
 					{prize}!
 				</h2>
 			</div>

@@ -1,18 +1,13 @@
 import type { PageServerLoad } from './$types';
 import { redirect } from '@sveltejs/kit';
-import pg from 'pg';
-const { Pool } = pg;
+import prisma from '$lib/server/prisma';
 
 // Read in info from .env file
 import { config } from 'dotenv';
 config();
 
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL
-});
-
 // Load and grab cookie
-export const load: PageServerLoad = async ({ request, cookies }) => {
+export const load: PageServerLoad = async ({ cookies }) => {
 	// Check if cookie is set
 	const cookie = cookies.get('player');
 	let validCookie = false;
@@ -20,16 +15,13 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 
 	// Check if cookie is valid
 	if (cookie) {
-		player = await pool.query(
-			`
-            SELECT *
-            FROM players
-            WHERE studentid = $1
-        `,
-			[cookie]
-		);
+		player = await prisma.players.findUnique({
+			where: {
+				StudentID: cookie
+			}
+		});
 
-		if (player.rows.length > 0) {
+		if (player) {
 			validCookie = true;
 		} else {
 			throw redirect(302, '/');
@@ -37,77 +29,86 @@ export const load: PageServerLoad = async ({ request, cookies }) => {
 	}
 	
 	// Check if get player.score and see if it equals the amount of stages
-	const stages = await pool.query(
-		`
-			SELECT *
-			FROM stages
-		`
-	);
+	const stages = await prisma.stages.findMany();
 
-	if (player.rows[0].score === stages.rows.length) {
-		await pool.query(
-			'UPDATE players SET finishedevent = true WHERE studentid = $1',
-			[cookie]
-		);
+	if (player?.Score === stages.length) {
+		await prisma.players.update({
+			where: {
+				StudentID: cookie
+			},
+			data: {
+				FinishedEvent: true
+			}
+		});
 
 		throw redirect(302, '/win/' + cookie);
 	}
 
 	// Check if target is null:
-	if (player.rows[0].target === null) {
-		await pool.query(
-			`
-			UPDATE players
-			SET target = (
-				SELECT UUID FROM stages
-				ORDER BY RANDOM()
-				LIMIT 1
-			)
-			WHERE studentid = $1
-		`,
-			[cookie]
-		);
+	if (player?.Target === null) {
+		await prisma.players.update({
+			where: {
+				StudentID: cookie
+			},
+			data: {
+				Target: {
+					set: JSON.stringify({
+						UUID: {
+							select: {
+								uuid: true
+							},
+							orderBy: {
+								random: true
+							},
+							take: 1
+						}
+					})
+				}
+			}
+		});
 
 	}
 
 	// Check if target exists
-	const target = await pool.query(
-		`
-			SELECT *
-			FROM stages
-			WHERE uuid = $1
-		`,
-		[player.rows[0].target]
-	);
+	const target = await prisma.stages.findUnique({
+		where: {
+			UUID: player?.Target
+		}
+	});
 
-	if (target.rows.length === 0) {
-		await pool.query(
-			`
-			UPDATE players
-			SET target = (
-				SELECT UUID FROM stages
-				ORDER BY RANDOM()
-				LIMIT 1
-			)
-			WHERE studentid = $1
-		`,
-			[cookie]
-		);
+	if (target) {
+		await prisma.players.update({
+			where: {
+				StudentID: cookie
+			},
+			data: {
+				Target: {
+					set: JSON.stringify({
+						UUID: {
+							select: {
+								uuid: true
+							},
+							orderBy: {
+								random: true
+							},
+							take: 1
+						}
+					})
+				}
+			}
+		});
 	}
 
 	// Get current target stage
-	const stage = await pool.query(
-		`
-            SELECT *
-            FROM stages
-            WHERE uuid = $1
-        `,
-		[player.rows[0].target]
-	);
+	const stage = await prisma.stages.findUnique({
+		where: {
+			UUID: player?.Target
+		}
+	});
 
 	return {
 		validCookie,
-		player: player.rows[0],
-		clue: stage.rows[0].clue
+		player: player,
+		clue: stage.Clue
 	};
 };

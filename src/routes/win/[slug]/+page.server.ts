@@ -1,49 +1,34 @@
 import type { PageServerLoad } from './$types';
-import pg from 'pg';
-const { Pool } = pg;
+import { redirect } from '@sveltejs/kit';
+import prisma from '$lib/server/prisma';
 
 // Read in info from .env file
 import { config } from 'dotenv';
 config();
 
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL
-});
-
-export const load: PageServerLoad = async ({ request, cookies }) => {
+export const load: PageServerLoad = async ({ cookies }) => {
 	// Check cookie and redirect if invalid
     const cookie = cookies.get('player');
-    let validCookie = false;
     let player;
 
     if (cookie) {
-        player = await pool.query(
-            `
-                SELECT *
-                FROM players
-                WHERE studentid = $1
-            `,
-            [cookie]
-        );
+        player = await prisma.players.findFirst({
+            where: {
+                StudentID: cookie
+            }
+        });
 
-        if (player.rows.length > 0) {
-            validCookie = true;
-        } else {
+        if (!player) {
             throw redirect(302, '/');
         }
     }
 
     // Check if get player.score and see if it equals the amount of stages
-    const stages = await pool.query(
-        `
-            SELECT *
-            FROM stages
-        `
-    );
+    const stages = await prisma.stages.findMany();
 
-    console.log(player.rows[0].score)
+    console.log(player?.Score);
 
-    if (player.rows[0].score >= stages.rows.length) {
+    if (player && player?.Score >= stages.length) {
         return {
             status: 200,
             message: 'You win!',

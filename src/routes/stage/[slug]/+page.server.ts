@@ -1,15 +1,10 @@
 import type { PageServerLoad, Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
-import pg from 'pg';
-const { Pool } = pg;
+import prisma from '$lib/server/prisma';
 
 // Read in info from .env file
 import { config } from 'dotenv';
 config();
-
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL
-});
 
 /*
     Hello code readers, (future me included, and any potential employers)
@@ -22,7 +17,7 @@ const pool = new Pool({
 
 
 export const load = (async ({ params, cookies }) => {
-    let slug = params.slug;
+    const slug = params.slug;
 
     if(cookies.get('player') === undefined){
         throw redirect(302, '/login')
@@ -32,49 +27,43 @@ export const load = (async ({ params, cookies }) => {
     let stage = Object.create(null);
     let player = Object.create(null);
 
-    stage = await pool.query(
-        `
-        SELECT * FROM stages
-        WHERE uuid = $1
-    `,
-        [slug]
-    );
+    stage = await prisma.stages.findUnique({
+        where: {
+            UUID: slug
+        }
+    });
 
-    player = await pool.query(
-        `
-        SELECT * FROM players
-        WHERE studentid = $1
-    `,
-        [cookies.get('player')]
-    );
+    player = await prisma.players.findUnique({
+        where: {
+            StudentID: cookies.get('player')
+        }
+    });
 
     // Does this stage exist?
-    if (Object.keys(stage.rows).length === 0) {
+    if (stage) {
         return {
             status: 404,
             message: 'Stage not found',
-            player: player.rows[0]
+            player: player
         };
     }
     else{
         // Is this their target stage?
-        if(params.slug !== player.rows[0].target){
+        if(params.slug !== player.Target){
             // Get the clue for the target stage
             let clue = Object.create(null);
 
-            clue = await pool.query(
-                `
-                SELECT * FROM stages
-                WHERE uuid = $1
-            `,
-                [player.rows[0].target]
-            );
+            clue = await prisma.stages.findUnique({
+                where: {
+                    UUID: player.rows[0].target
+                }
+            });
 
             return {
                 status: 403,
                 message: 'Not your target stage',
-                player: player.rows[0],
-                clue: clue.rows[0].clue
+                player: player,
+                clue: clue.Clue
             };
         }
         else{
@@ -89,7 +78,7 @@ export const load = (async ({ params, cookies }) => {
 
 export const actions = {
 	default: async ({ cookies, request }) => {
-		let reqData = await request.formData();
+		const reqData = await request.formData();
 
 		// Returns as format:
 		// FormData {
@@ -99,13 +88,11 @@ export const actions = {
 		// Update the completed stages column in the database
         let player = Object.create(null);
 
-        player = await pool.query(
-            `
-            SELECT * FROM players
-            WHERE studentid = $1
-        `,
-            [cookies.get('player')]
-        );
+        player = await prisma.players.findUnique({
+            where: {
+                StudentID: cookies.get('player')
+            }
+        });
 
         let completed = player.rows[0].completedstages;
 
@@ -118,14 +105,16 @@ export const actions = {
 
         completed.push(reqData.get('stage'));
 
-        await pool.query(
-            `
-            UPDATE players
-            SET completedstages = $1
-            WHERE studentid = $2
-        `,
-            [completed.join(','), cookies.get('player')]
-        );
+        await prisma.players.update({
+            where: {
+                StudentID: cookies.get('player')
+            },
+            data: {
+                CompletedStages: {
+                    set: completed
+                }
+            }
+        });
 
 
         // Check list of completed stages and select a random from the stages table that isn't in the list
@@ -137,7 +126,7 @@ export const actions = {
             queryString += `'` + completed[i] + `'`;
 
             if(i !== completed.length - 1){
-                queryString += `, `;
+            queryString += `, `;
             }
         }
 
@@ -145,46 +134,43 @@ export const actions = {
 
         console.log(queryString);
 
-        nextStage = await pool.query(queryString);
+        nextStage = await prisma.$queryRaw`${queryString}`;
 
         // Increase Player score by 1
-        await pool.query(
-            `
-            UPDATE players
-            SET score = score + 1
-            WHERE studentid = $1
-        `,
-            [cookies.get('player')]
-        );
+        await prisma.players.update({
+            where: {
+            StudentID: cookies.get('player')
+            },
+            data: {
+            Score: {
+                increment: 1
+            }
+            }
+        });
 
         // Check length of nextStage
-        if(nextStage.rows.length === 0){
-            // No more stages left
-            let stages = Object.create(null);
-
-            stages = await pool.query(
-                `
-                SELECT * FROM stages
-            `
-            );
-
-            await pool.query(
-                'UPDATE players SET finishedevent = true WHERE studentid = $1',
-                [cookies.get('player')]
-            );
+        if(nextStage.length === 0){
+            await prisma.players.update({
+                where: {
+                    StudentID: cookies.get('player')
+                },
+                data: {
+                    FinishedEvent: true
+                }
+            });
 
             throw redirect(302, '/win/' + cookies.get('player'));
         }
 
         // Update the target stage       
-        await pool.query(
-            `
-            UPDATE players
-            SET target = $1
-            WHERE studentid = $2
-        `,
-            [nextStage.rows[0].uuid, cookies.get('player')]
-        );
+        await prisma.players.update({
+            where: {
+                StudentID: cookies.get('player')
+            },
+            data: {
+                Target: nextStage.rows[0].uuid
+            }
+        });
 
         throw redirect(302, `/stage`);
 	}

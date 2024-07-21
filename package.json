@@ -34,7 +34,10 @@
 	"dependencies": {
 		"@prisma/client": "^5.17.0",
 		"@sveltejs/adapter-node": "^5.2.0",
+		"@types/qrcode": "^1.5.5",
 		"dotenv": "^16.4.5",
-		"lucide-svelte": "^0.412.0"
+		"lucide-svelte": "^0.412.0",
+		"qrcode": "^1.5.3",
+		"uuid": "^10.0.0"
 	}
 }

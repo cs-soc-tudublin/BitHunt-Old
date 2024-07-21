@@ -1,19 +1,14 @@
 import type { Actions } from './$types';
 import { redirect } from '@sveltejs/kit';
-import pg from 'pg';
-const { Pool } = pg;
+import prisma from '$lib/server/prisma';
 
 // Read in info from .env file
 import { config } from 'dotenv';
 config();
 
-const pool = new Pool({
-	connectionString: process.env.DATABASE_URL
-});
-
 export const actions = {
 	default: async ({ cookies, request }) => {
-		let reqData = await request.formData();
+		const reqData = await request.formData();
 
 		// Returns as format:
 		// FormData {
@@ -24,14 +19,13 @@ export const actions = {
 
 		// Check if account already exists
 
-		const checkQuery = {
-			text: 'SELECT * FROM Players WHERE studentid = $1',
-			values: [reqData.get('studentid')?.toString().toLowerCase()]
-		};
+		const existingPlayer = await prisma.players.findFirst({
+			where: {
+				StudentID: reqData.get('studentid')?.toString().toLowerCase()
+			}
+		});
 
-		const checkResult = await pool.query(checkQuery);
-
-		if (checkResult.rowCount != 0) {
+		if (existingPlayer) {
 			// Account already exists
 			return {
 				status: 500,
@@ -43,9 +37,13 @@ export const actions = {
 
 		// Get current event name
 
-		const currentEvent = await pool.query('SELECT * FROM Events WHERE active = true');
+		const currentEvent = await prisma.events.findFirst({
+			where: {
+				Active: true
+			}
+		});
 
-		if (currentEvent.rowCount == 0) {
+		if (currentEvent) {
 			// No active event
 			return {
 				status: 500,
@@ -72,32 +70,36 @@ export const actions = {
 			]
 		};
 
-		await pool.query(createQuery);
+		const createdPlayer = await prisma.players.create({
+			data: {
+				Name: reqData.get('name')?.toString(),
+				StudentID: reqData.get('studentid')?.toString().toLowerCase(),
+				Privacy: privacy,
+				Event: currentEvent.rows[0].id,
+				Score: 0
+			}
+		});
 
-		let player = await pool.query(
-			`
-			SELECT *
-			FROM players
-			WHERE studentid = $1
-		`,
-			[reqData.get('studentid').toString().toLowerCase()]
-		);
+		const player = await prisma.players.findUnique({
+			where: {
+				StudentID: reqData.get('studentid')?.toString().toLowerCase()
+			}
+		});
 
 		// Check if target is null:
-		if (player.rows[0].target === null) {
-			await pool.query(
-				`
-				UPDATE players
-				SET target = (
-					SELECT UUID FROM stages
-					ORDER BY RANDOM()
-					LIMIT 1
-				)
-				WHERE studentid = $1
-			`,
-				[reqData.get('studentid').toString().toLowerCase()]
-			);
-
+		if (!player?.Target) {
+			await prisma.players.update({
+				where: {
+					StudentID: reqData.get('studentid')?.toString().toLowerCase()
+				},
+				data: {
+					Target: {
+						set: {
+							UUID: true
+						}
+					}
+				}
+			});
 		}
 
 		// Check if target exists
