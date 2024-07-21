@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Players {
+  ID              Int       @id @default(autoincrement())
+  Name            String
+  StudentID       String    @unique
+  Privacy         Boolean
+  Event           String
+  Score           Int
+  Target          String
+  CompletedStages String
+  FinishedEvent   Boolean   @default(false)
+  Playerstages    Playerstages[]
+}
+
+model Stages {
+  ID    Int       @id @default(autoincrement())
+  Clue  String
+  Name  String
+  Event String
+  UUID  String
+  Playerstages    Playerstages[]
+}
+
+model Puzzles {
+  ID    Int    @id @default(autoincrement())
+  Event String
+  Puzzle String
+}
+
+model Completion {
+  StudentID String @unique
+  Event     String @unique
+}
+
+model Overall {
+  Event            String @unique
+  ParticipantCount Int
+  StageCount       Int
+  PuzzleCount      Int
+  PrizeCount       Int
+  StagesComplete   Int
+}
+
+model Events {
+  ID          Int      @id @default(autoincrement())
+  Name        String
+  Date        String
+  Location    String
+  Description String
+  Prize       String
+  PrizeCount  Int
+  Active      Boolean
+}
+
+model Playerstages {
+  PlayerStagesID Int      @id @default(autoincrement())
+  StudentID      Int
+  Event          String
+  StageID        Int
+  isCompleted    Boolean  @default(false)
+
+  Players  Players @relation(fields: [StudentID], references: [ID])
+  Stages   Stages  @relation(fields: [StageID], references: [ID])
+}
