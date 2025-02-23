@@ -1,68 +1,45 @@
-# BitHunt
+# RJM SvelteKit Template - Prisma
 
-BitHunt is a SvelteKit and PostgreSQL based web app that allows Societies to create treasure hunts for their members to complete.
-Each treasure hunt consists of multiple stages, each stage has a puzzle that the players must solve to get the clue to the next stage.
-Stages are found by scanning QR Codes, which are generated for each stage.
+This is my personal SvelteKit Git Repo template. It is licensed under GNU's GPL V3.0
+This template is specialised to have the Prisma ORM installed and given initial configuration. Changes to the Docker files were made to support this
 
-It was originally developed for CS++'s Freshers Treasure Hunt 2023.
+For the template without Prisma, look [here](https://github.com/RJMurg/SvelteKit-Template).
+For docs on using this template, go [here](./docs)
 
-## Features
+## Project Features
 
-- Player registration (by StudentID)
-- Leaderboard
-- Modular Stages
-- Modular Puzzles
-- Full Admin Suite
-- QR Code Generation
-- Overall Game Stats
+- ShadCN Svelte
+- TailwindCSS
+- Node Adapter
+- Prisma
+- Built in Containerisation (With Container Health Check)
 
-## Installation
+## Dev Features
 
-### Prerequisites
+- Vitest
+- ESLint
+- Prettier
+- PR Checks (Vitest & Test container build)
+- Container build on push to master / main
 
-- Node.js
-- NPM
-- PostgreSQL
+## Setup:
 
-### Steps
-
-1. Create a new PostgreSQL database.
-
-```sql
-CREATE DATABASE [name];
-```
-
-2. Clone the repository.
+1. Clone the repository
 
 ```bash
-git clone https://github.com/cs-soc-tudublin/BitHunt.git
+git clone https://github.com/RJMurg/SvelteKit-Template.git
 ```
 
-3. Install the dependencies.
+2. Install the dependencies
 
 ```bash
 npm install
 ```
 
-4. Create a `.env` file in the root directory of the project and add the following environment variables.
-
-```env
-DATABASE_URL=postgres://[username]:[password]@[database URL]:[port]/[name]
-ADMIN_PASSWORD=[password]
-```
-
-5. Start the server.
+3. Run the development server
 
 ```bash
 npm run dev
 ```
 
-6. Navigate to '[URL]:5173/admin' and log in with the password you set in the `.env` file.
-
-7. Ensure the toast at the top of the page says 'Database Repaired!'
-
-8. You're good to go!
-
-## Documentation
-
-The documentation for BitHunt can be found in the [docs](docs) directory.
+You are now ready to develop!

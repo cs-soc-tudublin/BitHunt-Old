@@ -1,0 +1,28 @@
+services:
+  bithunt:
+    build: .
+    container_name: bithunt
+    environment:
+      DATABASE_URL: postgresql://prisma:prisma@bithunt-db:5432/prismadb?schema=public
+    depends_on:
+      - db
+    networks:
+      - bithunt
+
+  bithunt-db:
+    image: postgres:13
+    container_name: bithunt-db
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: prisma
+      POSTGRES_DB: prismadb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - bithunt
+
+networks:
+  bithunt:
+
+volumes:
+  postgres-data:
