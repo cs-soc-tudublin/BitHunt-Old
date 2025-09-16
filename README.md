@@ -1,3 +1,6 @@
+# ARCHIVED
+This repo is archived, please see the new [BitHunt](https://github.com/cs-soc-tudublin/BitHunt)
+
 # BitHunt
 
 BitHunt is a SvelteKit and PostgreSQL based web app that allows Societies to create treasure hunts for their members to complete.
